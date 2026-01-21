@@ -1,0 +1,2400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:fillViewport="true"
+    android:paddingBottom="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ================= HEADER / WELCOME ================= -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@drawable/header_gradient_background"
+            android:padding="24dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:elevation="4dp">
+
+            <!-- Greeting with icon -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_profile"
+                    android:contentDescription="Profile Icon"/>
+
+
+
+
+            </LinearLayout>
+
+            <!-- Main heading -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find Your Perfect\nHostel"
+                android:textColor="@android:color/white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:lineSpacingExtra="4dp"
+                android:letterSpacing="-0.02"
+                android:layout_marginTop="12dp"/>
+
+            <!-- Feature badges -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ================= FEATURED HOSTELS ================= -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Featured Hostels"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_blue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See All →"
+                android:textSize="14sp"
+                android:textColor="@color/dark_blue"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- ================= HOSTEL CARDS ================= -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- ========== HOSTEL CARD 1 ========== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/hostelCard1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/hostel33"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐ 4.5"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:background="@color/dark_blue"
+                            android:padding="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="12dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Boys"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="11sp"
+                            android:background="@color/dark_blue"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_gravity="top|start"
+                            android:layout_margin="12dp"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Elite Boys Hostel"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PKR 12,000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="per month"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_gravity="end"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📍"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="G-11 Markaz, Near NUST University"
+                                android:textSize="13sp"
+                                android:textColor="#616161"
+                                android:layout_marginStart="4dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🛏️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2-3 Seater"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📶"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Free WiFi"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="❄️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="AC Rooms"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expandableDetails1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="16dp"
+                            android:padding="12dp"
+                            android:background="@drawable/details_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Room Details"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Room Type:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2-3 Seater"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Available Rooms:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5 Rooms"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Facilities &amp; Amenities"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="✓ Air Conditioning\n✓ Free High-Speed WiFi\n✓ Laundry Service\n✓ 24/7 Security\n✓ CCTV Surveillance\n✓ Common TV Lounge\n✓ Study Room\n✓ Power Backup"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mess &amp; Food"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Facility:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Available (Optional)"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Charges:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="PKR 6,000/month"
+                                    android:textColor="#4CAF50"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="• Meals: Breakfast, Lunch, Dinner\n• Menu: Daily changing menu\n• Timing: 7am-10pm"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"
+                                android:layout_marginTop="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contact Information"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📞"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" +92 300 1234567"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✉️"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" elite.boys@hostel.com"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Call Now"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    app:strokeColor="@color/dark_blue"
+                                    app:strokeWidth="1dp"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Visit Hostel"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    android:textColor="@color/white"
+                                    android:backgroundTint="@color/dark_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/viewDetailsBtn1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="View Full Details"
+                            android:textColor="@color/dark_blue"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:strokeColor="@color/dark_blue"
+                            app:strokeWidth="2dp"
+
+                            app:iconTint="@color/dark_blue"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_marginTop="12dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ========== HOSTEL CARD 2 ========== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/hostelCard2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/hostel54"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐ 4.8"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:background="@drawable/rating_badge"
+                            android:padding="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="12dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Girls"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="11sp"
+                            android:background="@drawable/type_badge_pink"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_gravity="top|start"
+                            android:layout_margin="12dp"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Comfort Girls Hostel"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PKR 15,000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#4CAF50"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="per month"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_gravity="end"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📍"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="F-7 Markaz, Near Jinnah Super Market"
+                                android:textSize="13sp"
+                                android:textColor="#616161"
+                                android:layout_marginStart="4dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🛏️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Single Room"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🔒"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="24/7 Security"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="❄️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="AC Rooms"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expandableDetails2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="16dp"
+                            android:padding="12dp"
+                            android:background="@drawable/details_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Room Details"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Room Type:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Single &amp; Double"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Available Rooms:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3 Rooms"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Facilities &amp; Amenities"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="✓ Air Conditioning\n✓ Free High-Speed WiFi\n✓ Attached Washrooms\n✓ 24/7 Security &amp; CCTV\n✓ Female Warden Available\n✓ Covered Parking\n✓ Kitchen Facility\n✓ Iron &amp; Ironing Board"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mess &amp; Food"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Facility:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Available (Optional)"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Charges:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="PKR 7,500/month"
+                                    android:textColor="#4CAF50"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="• Meals: Breakfast, Lunch, Dinner\n• Special diet options available\n• Timing: 7am-9:30pm"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"
+                                android:layout_marginTop="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contact Information"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📞"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" +92 300 7654321"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✉️"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" comfort.girls@hostel.com"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Call Now"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    app:strokeColor="@color/dark_blue"
+                                    app:strokeWidth="1dp"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Visit Hostel"
+                                    android:textSize="13sp"
+                                    android:textColor="@color/white"
+                                    app:cornerRadius="8dp"
+                                    android:backgroundTint="@color/dark_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/viewDetailsBtn2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="View Full Details"
+                            android:textColor="@color/dark_blue"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:strokeColor="@color/dark_blue"
+                            app:strokeWidth="2dp"
+
+                            app:iconTint="@color/dark_blue"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_marginTop="12dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ========== HOSTEL CARD 3 ========== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/hostelCard3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/hostel66"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐ 4.7"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:background="@drawable/rating_badge"
+                            android:padding="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="12dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Boys"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="11sp"
+                            android:background="@drawable/type_badge"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_gravity="top|start"
+                            android:layout_margin="12dp"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Premium Boys Hostel"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PKR 18,000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#4CAF50"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="per month"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_gravity="end"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📍"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="I-8 Markaz, Near Fatima Jinnah Park"
+                                android:textSize="13sp"
+                                android:textColor="#616161"
+                                android:layout_marginStart="4dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🛏️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Single Room"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🏋️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Gym Access"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🍳"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Breakfast"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expandableDetails3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="16dp"
+                            android:padding="12dp"
+                            android:background="@drawable/details_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Room Details"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Room Type:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Single Room"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Available Rooms:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2 Rooms"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Facilities &amp; Amenities"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="✓ Air Conditioning\n✓ Free High-Speed WiFi\n✓ Gym Access\n✓ Swimming Pool\n✓ 24/7 Security\n✓ Housekeeping Service\n✓ Gaming Room\n✓ Roof Top Lounge"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mess &amp; Food"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Facility:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Available (Included)"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Free Breakfast:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Yes (Daily)"
+                                    android:textColor="#4CAF50"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="• Meals: Breakfast (Free), Lunch, Dinner\n• Premium quality food\n• Timing: 6am-10pm"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"
+                                android:layout_marginTop="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contact Information"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📞"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" +92 300 1122334"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✉️"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" premium.boys@hostel.com"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Call Now"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    app:strokeColor="@color/dark_blue"
+                                    app:strokeWidth="1dp"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Visit Hostel"
+                                    android:textSize="13sp"
+                                    android:textColor="@color/white"
+                                    app:cornerRadius="8dp"
+                                    android:backgroundTint="@color/dark_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/viewDetailsBtn3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="View Full Details"
+                            android:textColor="@color/dark_blue"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:strokeColor="@color/dark_blue"
+                            app:strokeWidth="2dp"
+
+                            app:iconTint="@color/dark_blue"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_marginTop="12dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ========== HOSTEL CARD 4 ========== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/hostelCard4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/hostel13"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐ 4.6"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:background="@drawable/rating_badge"
+                            android:padding="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="12dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Girls"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="11sp"
+                            android:background="@drawable/type_badge_pink"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_gravity="top|start"
+                            android:layout_margin="12dp"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Royal Girls Residence"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PKR 16,500"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#4CAF50"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="per month"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_gravity="end"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📍"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="E-11, Near Quaid-e-Azam University"
+                                android:textSize="13sp"
+                                android:textColor="#616161"
+                                android:layout_marginStart="4dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🛏️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2 Seater"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🚿"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Attached Bath"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🅿️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Parking"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expandableDetails4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="16dp"
+                            android:padding="12dp"
+                            android:background="@drawable/details_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Room Details"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Room Type:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2 Seater"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Available Rooms:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="4 Rooms"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Facilities &amp; Amenities"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="✓ Air Conditioning\n✓ Free WiFi\n✓ Attached Washrooms\n✓ Female Security\n✓ CCTV &amp; Biometric\n✓ Covered Parking\n✓ Laundry Service\n✓ Study Area"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mess &amp; Food"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Facility:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Available (Optional)"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Charges:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="PKR 7,000/month"
+                                    android:textColor="#4CAF50"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="• Meals: 3 times daily\n• Hygienic kitchen\n• Timing: 7am-9pm"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"
+                                android:layout_marginTop="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contact Information"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="4dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📞"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" +92 321 5566778"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✉️"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" royal.girls@hostel.com"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Call Now"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    app:strokeColor="@color/dark_blue"
+                                    app:strokeWidth="1dp"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Visit Hostel"
+                                    android:textSize="13sp"
+                                    android:textColor="@color/white"
+                                    app:cornerRadius="8dp"
+                                    android:backgroundTint="@color/dark_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/viewDetailsBtn4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="View Full Details"
+                            android:textColor="@color/dark_blue"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:strokeColor="@color/dark_blue"
+                            app:strokeWidth="2dp"
+
+                            app:iconTint="@color/dark_blue"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_marginTop="12dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ========== HOSTEL CARD 5 ========== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/hostelCard5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/hostel33"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐ 4.4"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="13sp"
+                            android:background="@drawable/rating_badge"
+                            android:padding="8dp"
+                            android:layout_gravity="top|end"
+                            android:layout_margin="12dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Boys"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="11sp"
+                            android:background="@drawable/type_badge"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_gravity="top|start"
+                            android:layout_margin="12dp"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Student Boys Hostel"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PKR 10,000"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#4CAF50"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="per month"
+                            android:textSize="11sp"
+                            android:textColor="#757575"
+                            android:layout_gravity="end"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="📍"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="G-9/4, Near AIR University"
+                                android:textSize="13sp"
+                                android:textColor="#616161"
+                                android:layout_marginStart="4dp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🛏️"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3-4 Seater"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📶"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="WiFi"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🔒"
+                                    android:textSize="16sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Security"
+                                    android:textSize="12sp"
+                                    android:textColor="#424242"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/expandableDetails5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="16dp"
+                            android:padding="12dp"
+                            android:background="@drawable/details_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Room Details"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Room Type:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3-4 Seater"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Available Rooms:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="6 Rooms"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Facilities &amp; Amenities"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="✓ Free WiFi\n✓ Common Washrooms\n✓ 24/7 Security\n✓ CCTV Cameras\n✓ Common TV Room\n✓ Study Tables\n✓ Generator Backup\n✓ Water Cooler"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mess &amp; Food"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Facility:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Available (Optional)"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginBottom="6dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="• Mess Charges:"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="PKR 5,500/month"
+                                    android:textColor="#4CAF50"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="• Meals: 3 times daily\n• Basic home-style cooking\n• Timing: 7am-9pm"
+                                android:textColor="#424242"
+                                android:textSize="13sp"
+                                android:lineSpacingExtra="4dp"
+                                android:layout_marginTop="4dp"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="#E0E0E0"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Contact Information"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/dark_blue"
+                                android:layout_marginBottom="8dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:layout_marginBottom="4dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📞"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" +92 333 9988776"
+                                    android:textColor="@color/dark_blue"
+                                    android:textStyle="bold"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✉️"
+                                    android:textSize="14sp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=" student.boys@hostel.com"
+                                    android:textColor="#616161"
+                                    android:textSize="13sp"
+                                    android:layout_marginStart="4dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Call Now"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    app:strokeColor="@color/dark_blue"
+                                    app:strokeWidth="1dp"
+                                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                    android:layout_marginEnd="8dp"/>
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Visit Hostel"
+                                    android:textColor="@color/white"
+                                    android:textSize="13sp"
+                                    app:cornerRadius="8dp"
+                                    android:backgroundTint="@color/dark_blue"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/viewDetailsBtn5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="View Full Details"
+                            android:textColor="@color/dark_blue"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            app:cornerRadius="8dp"
+                            app:strokeColor="@color/dark_blue"
+                            app:strokeWidth="2dp"
+
+                            app:iconTint="@color/dark_blue"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_marginTop="12dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Cards 6-10 will continue with similar structure but different data -->
+            <!-- I'll provide the remaining 5 cards in the next part -->
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Hostello</string>
+    <string name="logo">Hostello Logo</string>
+    <string name="how_do_you_want_to_proceed">How do you want\nto proceed?</string>
+    <string name="continue_as_member">Continue as a Member</string>
+    <string name="continue_as_owner">Continue as an Owner</string>
+    <string name="back">Back</string>
+
+    <string name="We_will_send_you_a_verifivation_code">We will send you a verifivation code</string>
+    <string name="Enter_your_Phone_Number">Enter your Number</string>
+    <string name="countrycode">+92</string>
+    <string name="continue_button">Continue</string>
+    <string name="by_clicking_continue_button_you_are_agreeing_to_our_terms_of_use">By clicking Continue button you are agreeing to our terms of use</string>
+
+    <string name="owner_portal">Owner Portal</string>
+    <string name="welcome_owner">Welcome, Hostel Owner!</string>
+    <string name="owner_subtitle">Manage your hostel property with ease and reach more students</string>
+    <string name="what_you_can_do">What You Can Do</string>
+    <string name="feature_1_title">List Your Property</string>
+    <string name="feature_1_desc">Add your hostel details, room types, pricing, and amenities to attract potential tenants</string>
+    <string name="feature_2_title">Manage Bookings</string>
+    <string name="feature_2_desc">Track room availability, accept or decline booking requests, and manage tenant information</string>
+    <string name="feature_3_title">Receive Payments</string>
+    <string name="feature_3_desc">Get secure payments directly through the app with detailed transaction history</string>
+    <string name="feature_4_title">Analytics &amp; Reports</string>
+    <string name="feature_4_desc">View occupancy rates, revenue insights, and tenant feedback to improve your service</string>
+    <string name="get_started">Get Started</string>
+    <string name="owner_registration">Owner Registration</string>
+    <string name="create_your_account">Create Your Account</string>
+    <string name="fill_details_to_register">Fill in your details to register as a hostel owner</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="hostel_name">Hostel Name</string>
+    <string name="hostel_address">Hostel Address</string>
+    <string name="city">City</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="agree_terms">I agree to the Terms and Conditions</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_4_digit_code">Enter 4 digit code</string>
+    <string name="code_hint">- - - -</string>
+    <string name="resend_code">resend code ?</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+
+
+    <string name="terms_description">By using the BuyPk app, you agree to follow our terms and confirm that all information you provide—such as name, address, and contact details—is accurate. BuyPk is designed to promote Pakistani products, and product prices, details, and availability may change without notice. All orders depend on stock availability and successful payment.\n
+
+BuyPk follows a transparent profit allocation policy where 1% of the profit from every product is donated to humanitarian aid for Gaza, and another 1% is kept by BuyPk to support and maintain the app. This structure ensures both social contribution and the smooth functioning of the platform.
+Delivery times may vary due to location, product availability, or third-party service delays, for which BuyPk is not responsible. Refunds or returns are only accepted for damaged, incorrect, or expired products reported within 24 hours of delivery along with valid proof.\n
+Your personal data is used only for processing orders, delivery, and improving the app experience. All logos, designs, and content belong to BuyPk and cannot be reused without permission. Continued use of the app means you accept any future updates to these Terms and Conditions.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_icon">Profile Icon</string>
+</resources>

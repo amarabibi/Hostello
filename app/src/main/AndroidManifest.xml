@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/host_logo_02"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/host_logo_02"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Hostello">
+
+        <!--        OTP ACTIVITY-->
+        <activity
+            android:name=".OtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TermsOfUse"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+         <!-- Splash Screen Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- Intro Activity -->
+        <activity
+            android:name=".intro"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- Buy or Sell Activity -->
+        <activity
+            android:name=".buy_or_sell"
+            android:exported="false" />
+        <!-- Phone Number Activity -->
+        <activity
+            android:name=".PhoneNumber"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+        <!-- Owner Activity -->
+        <activity
+            android:name=".OwnerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+        <!-- OwnerRegistrationActivity -->
+        <activity
+            android:name=".OwnerRegistrationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+        <!-- Home Activity -->
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+        <activity
+            android:name=".MainHomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+    </application>
+
+</manifest>

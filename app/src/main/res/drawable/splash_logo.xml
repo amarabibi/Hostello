@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="150dp"
+    android:viewportWidth="150"
+    android:viewportHeight="150">
+
+    <!-- Green Circle -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M75,75m-70,0a70,70 0,1 1,140 0a70,70 0,1 1,-140 0"/>
+
+    <!-- White H -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,40 L50,110 L60,110 L60,80 L90,80 L90,110 L100,110 L100,40 L90,40 L90,70 L60,70 L60,40 Z"/>
+</vector>

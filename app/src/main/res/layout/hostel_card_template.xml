@@ -1,0 +1,121 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hostelCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="10dp"
+    app:cardBackgroundColor="#F2F7FF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Hostel Image -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/host_logo_02" />
+
+        <!-- CONTENT -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <!-- Title + Price -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Elite Boys Hostel"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_blue" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PKR 12,000"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue" />
+            </LinearLayout>
+
+            <!-- Location -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍 Near University Road"
+                android:textSize="13sp"
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="4dp" />
+
+            <!-- Rating -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐ 4.5  •  120 Reviews"
+                android:textSize="13sp"
+                android:textColor="@color/blue"
+                android:layout_marginTop="6dp" />
+
+            <!-- Facilities -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✔ Free WiFi  •  ✔ AC Rooms  •  ✔ Mess"
+                android:textSize="13sp"
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="6dp" />
+
+            <!-- View Details Button -->
+            <TextView
+                android:id="@+id/viewDetailsBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Details"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/blue"
+                android:layout_marginTop="10dp" />
+
+            <!-- EXPANDABLE DETAILS -->
+            <LinearLayout
+                android:id="@+id/expandableDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="• Fully furnished rooms\n• 24/7 Security\n• Laundry service\n• Power backup"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_gray" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Contact: 0301-XXXXXXX"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_blue"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

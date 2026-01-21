@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".OtpActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_bg">
+
+        <!-- Back Button  -->
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="26dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/dark_blue" />
+
+        <!-- Main Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="40dp">
+
+            <!-- Title with better spacing -->
+            <TextView
+                android:id="@+id/member_verification_code_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_4_digit_code"
+                android:textAlignment="center"
+                android:textColor="@color/dark_blue"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="12dp"
+                android:letterSpacing="0.01" />
+
+            <!-- Subtitle for context -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="We've sent you a verification code"
+                android:textAlignment="center"
+                android:textColor="@color/dark_blue"
+                android:textSize="14sp"
+                android:layout_marginBottom="50dp"
+                android:alpha="0.7" />
+
+            <!-- Code label -->
+            <TextView
+                android:id="@+id/member_ver_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verification Code"
+                android:textColor="@color/dark_blue"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Enter verification code with card wrapper -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#E3F2FD"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="24dp">
+
+                <EditText
+                    android:id="@+id/member_four_digit_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/code_hint"
+                    android:inputType="number"
+                    android:padding="16dp"
+                    android:textColor="@color/dark_blue"
+                    android:textColorHint="@color/text_gray"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:maxLength="6"
+                    android:gravity="center"
+                    android:letterSpacing="0.2"
+                    android:background="@android:color/transparent" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Confirm OTP button -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/member_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#1565C0">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/confirm_button"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.03" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Resend code section -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Didn't receive the code? "
+                    android:textSize="13sp"
+                    android:textColor="@color/text_gray" />
+
+                <TextView
+                    android:id="@+id/code_confirm_agree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resend_code"
+                    android:textSize="13sp"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
