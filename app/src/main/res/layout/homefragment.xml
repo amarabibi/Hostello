@@ -36,9 +36,6 @@
                     android:src="@drawable/ic_profile"
                     android:contentDescription="Profile Icon"/>
 
-
-
-
             </LinearLayout>
 
             <!-- Main heading -->
@@ -93,6 +90,7 @@
         </LinearLayout>
 
         <!-- ================= HOSTEL CARDS ================= -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
