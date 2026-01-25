@@ -27,7 +27,8 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_hostel, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_hostel, parent, false);
         return new ViewHolder(view);
     }
 
@@ -39,20 +40,24 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         holder.hostelAddress.setText(hostel.getLocation());
         holder.hostelImage.setImageResource(hostel.getImageResId());
 
-        // Click on rating to open ReviewFragment
-        holder.reviewRating.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("hostelName", hostel.getName());
+        // Open Review Fragment when rating clicked
+        if (holder.reviewRating != null) {
+            holder.reviewRating.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("hostelName", hostel.getName());
 
-            ReviewFragment reviewFragment = new ReviewFragment();
-            reviewFragment.setArguments(bundle);
+                ReviewFragment reviewFragment = new ReviewFragment();
+                reviewFragment.setArguments(bundle);
 
-            ((FragmentActivity) context).getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, reviewFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
+                if (context instanceof FragmentActivity) {
+                    ((FragmentActivity) context).getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, reviewFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
+        }
     }
 
     @Override
@@ -60,16 +65,19 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         return hostelList.size();
     }
 
+    // ================= VIEW HOLDER =================
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         ImageView hostelImage;
         TextView hostelName, hostelAddress, reviewRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             hostelImage = itemView.findViewById(R.id.hostelImage);
             hostelName = itemView.findViewById(R.id.hostelName);
-            hostelAddress = itemView.findViewById(R.id.hostelLocation);
-            reviewRating = itemView.findViewById(R.id.reviewRating);
+            hostelAddress = itemView.findViewById(R.id.hostelLocation); // MUST match XML id
+            reviewRating = itemView.findViewById(R.id.reviewRating);   // MUST exist in XML
         }
     }
 }

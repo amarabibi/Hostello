@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +19,8 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private View searchIcon;
-    private View searchLayout; // Use generic View to avoid type issues
+    private ImageView searchIcon;
+    private View searchLayout;
     private SearchView searchView;
     private RecyclerView hostelRecyclerView;
     private HostelAdapter adapter;
@@ -30,18 +31,22 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.searchfragment, container, false);
 
-        // Initialize views
         searchIcon = view.findViewById(R.id.searchIcon);
         searchLayout = view.findViewById(R.id.searchLayout);
         searchView = view.findViewById(R.id.searchView);
         hostelRecyclerView = view.findViewById(R.id.hostelRecyclerView);
 
-        // Initially hide search layout
+        // Prevent null crashes
+        if (searchLayout == null || searchIcon == null || searchView == null || hostelRecyclerView == null) {
+            return view;
+        }
+
         searchLayout.setVisibility(View.GONE);
 
-        // Sample hostel data
+        // Sample data
         hostelList = new ArrayList<>();
         hostelList.add(new HostelModel("Green Valley Hostel", "G-11 Markaz", R.drawable.hostel54));
         hostelList.add(new HostelModel("Sunrise Hostel", "F-10 Sector", R.drawable.hostel33));
@@ -50,18 +55,17 @@ public class SearchFragment extends Fragment {
 
         filteredList = new ArrayList<>(hostelList);
 
-        // Setup RecyclerView
         adapter = new HostelAdapter(getContext(), filteredList);
         hostelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         hostelRecyclerView.setAdapter(adapter);
 
-        // Click on search icon -> show search layout
+        // Show search bar
         searchIcon.setOnClickListener(v -> {
             searchIcon.setVisibility(View.GONE);
             searchLayout.setVisibility(View.VISIBLE);
         });
 
-        // Search functionality
+        // Filter logic
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -81,6 +85,7 @@ public class SearchFragment extends Fragment {
 
     private void filterHostels(String query) {
         filteredList.clear();
+
         if (TextUtils.isEmpty(query)) {
             filteredList.addAll(hostelList);
         } else {
@@ -90,6 +95,7 @@ public class SearchFragment extends Fragment {
                 }
             }
         }
+
         adapter.notifyDataSetChanged();
     }
 }
