@@ -16,7 +16,7 @@
         android:src="@drawable/ic_search"
         android:layout_gravity="center"
         android:contentDescription="Search Icon"
-        app:tint="@color/blue" />
+        app:tint="#1565C0" />
 
     <!-- Optional label under icon -->
     <TextView

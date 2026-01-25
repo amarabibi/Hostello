@@ -7,7 +7,7 @@
         android:type="linear"
         android:angle="135"
         android:centerColor="@color/dark_blue"
-        android:endColor="@color/blue"/>
+        android:endColor="#1565C0"/>
 
     <!-- Rounded corners -->
     <corners
