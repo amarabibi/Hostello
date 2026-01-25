@@ -1,105 +1,56 @@
-package com.example.hostello;
+package com.example.hostello; // change to your package name
 
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 public class NotificationFragment extends Fragment {
 
-    private static final String CHANNEL_ID = "hostello_channel";
-    private static final int NOTIFICATION_ID = 1;
-    private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
+    public NotificationFragment() {
+        // Required empty public constructor
+    }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
-        // Create notification channel for Android 8.0+ (API 26+)
-        createNotificationChannel();
+        View notif1 = view.findViewById(R.id.notif1);
+        View notif2 = view.findViewById(R.id.notif2);
+        View notif3 = view.findViewById(R.id.notif3);
 
-        // Set click listener
-        view.findViewById(R.id.notification_fragment_root).setOnClickListener(v -> checkPermissionAndNotify());
+        notif1.setOnClickListener(v -> openDetail(
+                "Room Inspection Notice",
+                "The hostel owner will inspect rooms tomorrow at 10 AM. Please ensure your room is clean and organized.",
+                "2 hours ago"
+        ));
+
+        notif2.setOnClickListener(v -> openDetail(
+                "Water Supply Maintenance",
+                "Water supply will be unavailable from 2 PM to 5 PM due to maintenance work.",
+                "Yesterday"
+        ));
+
+        notif3.setOnClickListener(v -> openDetail(
+                "Mess Menu Updated",
+                "The weekly mess menu has been updated. Please check the notice board for details.",
+                "2 days ago"
+        ));
 
         return view;
     }
 
-    // Create channel for Android 8+
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Hostello Notifications";
-            String description = "Channel for Hostello fragment notifications";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = requireActivity().getSystemService(NotificationManager.class);
-            if (notificationManager != null) {
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
-    }
-
-    // Check permission and send notification
-    private void checkPermissionAndNotify() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
-            if (ContextCompat.checkSelfPermission(requireContext(),
-                    android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                // Request permission from user
-                ActivityCompat.requestPermissions(requireActivity(),
-                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
-                        REQUEST_NOTIFICATION_PERMISSION);
-                return; // Wait for user response
-            }
-        }
-
-        // Safe to send notification
-        sendNotification();
-    }
-
-    // Send notification with permission check and exception handling
-    private void sendNotification() {
-        try {
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_notification) // Make sure this drawable exists
-                    .setContentTitle("Hostello Notification")
-                    .setContentText("You clicked on the NotificationFragment!")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
-
-            // Extra safety check for Android 13+
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
-                    || ContextCompat.checkSelfPermission(requireContext(),
-                    android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                notificationManager.notify(NOTIFICATION_ID, builder.build());
-            }
-        } catch (SecurityException e) {
-            e.printStackTrace(); // Permission denied or other security issue
-        }
-    }
-
-    // Handle user permission result
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                sendNotification(); // Permission granted, send notification
-            }
-        }
+    private void openDetail(String title, String message, String time) {
+        Intent intent = new Intent(getActivity(), NotificationDetailActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("message", message);
+        intent.putExtra("time", time);
+        startActivity(intent);
     }
 }
