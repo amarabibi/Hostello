@@ -1,56 +1,68 @@
-package com.example.hostello;
-
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
+public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder> {
 
     private Context context;
-    private List<ReviewModel> reviews;
+    private List<HostelModel> hostelList;
 
-    public ReviewAdapter(Context context, List<ReviewModel> reviews) {
+    public HostelAdapter(Context context, List<HostelModel> hostelList) {
         this.context = context;
-        this.reviews = reviews;
+        this.hostelList = hostelList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_review, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_hostel, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ReviewModel review = reviews.get(position);
-        holder.name.setText(review.getName());
-        holder.date.setText(review.getDate());
-        holder.rating.setText("⭐ " + review.getRating());
-        holder.comment.setText(review.getComment());
+        HostelModel hostel = hostelList.get(position);
+
+        holder.hostelName.setText(hostel.getName());
+        holder.hostelAddress.setText(hostel.getAddress());
+        holder.hostelImage.setImageResource(hostel.getImageRes());
+
+        // Click on rating to open ReviewFragment
+        holder.reviewRating.setOnClickListener(v -> {
+            // Pass hostel info to ReviewFragment
+            Bundle bundle = new Bundle();
+            bundle.putString("hostelName", hostel.getName());
+            bundle.putInt("hostelId", hostel.getId()); // optional
+
+            ReviewFragment reviewFragment = new ReviewFragment();
+            reviewFragment.setArguments(bundle);
+
+            // Open fragment
+            ((FragmentActivity) context).getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, reviewFragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
     @Override
     public int getItemCount() {
-        return reviews.size();
+        return hostelList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, date, rating, comment;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView hostelImage;
+        TextView hostelName, hostelAddress, reviewRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.reviewerName);
-            date = itemView.findViewById(R.id.reviewDate);
-            rating = itemView.findViewById(R.id.reviewRating);
-            comment = itemView.findViewById(R.id.reviewComment);
+            hostelImage = itemView.findViewById(R.id.hostelImage);
+            hostelName = itemView.findViewById(R.id.hostelName);
+            hostelAddress = itemView.findViewById(R.id.hostelAddress);
+            reviewRating = itemView.findViewById(R.id.reviewRating); // the ⭐ TextView
         }
     }
 }
