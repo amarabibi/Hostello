@@ -23,12 +23,15 @@
 
         <!-- Notification Item 1 -->
         <LinearLayout
+            android:id="@+id/notif1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_notification_item"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="40dp"
@@ -69,12 +72,15 @@
 
         <!-- Notification Item 2 -->
         <LinearLayout
+            android:id="@+id/notif2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_notification_item"
             android:orientation="horizontal"
             android:padding="12dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="40dp"
@@ -115,11 +121,14 @@
 
         <!-- Notification Item 3 -->
         <LinearLayout
+            android:id="@+id/notif3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_notification_item"
             android:orientation="horizontal"
-            android:padding="12dp">
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="40dp"
