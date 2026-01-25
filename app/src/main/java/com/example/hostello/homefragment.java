@@ -1,10 +1,12 @@
 package com.example.hostello;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -306,7 +308,22 @@ public class homefragment extends Fragment {
                 viewDetails20.setText("View Details");
             }
         });
+        ImageView icUser = view.findViewById(R.id.ic_user);
+
+        icUser.setOnClickListener(v -> {
+            // Replace current fragment with ProfileFragment
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ProfileFragment()) // your container ID
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+
 
         return view;
     }
+
+
+
 }

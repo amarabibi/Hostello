@@ -23,8 +23,8 @@ public class SearchFragment extends Fragment {
     private SearchView searchView;
     private RecyclerView hostelRecyclerView;
     private HostelAdapter adapter;
-    private List<String> hostelList; // sample hostel names
-    private List<String> filteredList;
+    private List<HostelModel> hostelList;
+    private List<HostelModel> filteredList;
 
     @Nullable
     @Override
@@ -36,20 +36,17 @@ public class SearchFragment extends Fragment {
         searchView = view.findViewById(R.id.searchView);
         hostelRecyclerView = view.findViewById(R.id.hostelRecyclerView);
 
-        // Sample hostels
+        // Sample hostel data with local drawable images
         hostelList = new ArrayList<>();
-        // Example dummy data
-        hostelList.add(String.valueOf(new HostelModel("Green Valley Hostel", "G-11 Markaz", R.drawable.hostel13)));
-        hostelList.add(String.valueOf(new HostelModel("Sunrise Hostel", "Blue Area", R.drawable.hostel33)));
-        hostelList.add(String.valueOf(new HostelModel("Blue Sky Hostel", "F-10 Markaz", R.drawable.hostel54
-        )));
-        hostelList.add(String.valueOf(new HostelModel("River View Hostel", "Sector H-8", R.drawable.hostel66)));
-
+        hostelList.add(new HostelModel("Green Valley Hostel", "G-11 Markaz", R.drawable.hostel54));
+        hostelList.add(new HostelModel("Sunrise Hostel", "F-10 Sector", R.drawable.hostel33));
+        hostelList.add(new HostelModel("Blue Sky Hostel", "G-9 Sector", R.drawable.hostel13));
+        hostelList.add(new HostelModel("River View Hostel", "G-8 Sector", R.drawable.hostel66));
 
         filteredList = new ArrayList<>(hostelList);
 
         // Setup RecyclerView
-        adapter = new HostelAdapter(filteredList);
+        adapter = new HostelAdapter(getContext(), filteredList);
         hostelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         hostelRecyclerView.setAdapter(adapter);
 
@@ -60,7 +57,7 @@ public class SearchFragment extends Fragment {
             hostelRecyclerView.setVisibility(View.VISIBLE);
         });
 
-        // Handle search input
+        // Search functionality
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -83,8 +80,8 @@ public class SearchFragment extends Fragment {
         if (TextUtils.isEmpty(query)) {
             filteredList.addAll(hostelList);
         } else {
-            for (String hostel : hostelList) {
-                if (hostel.toLowerCase().contains(query.toLowerCase())) {
+            for (HostelModel hostel : hostelList) {
+                if (hostel.getName().toLowerCase().contains(query.toLowerCase())) {
                     filteredList.add(hostel);
                 }
             }

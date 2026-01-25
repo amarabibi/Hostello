@@ -15,10 +15,9 @@ import java.util.List;
 
 public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.HostelViewHolder> {
 
-    private List<HostelModel> hostels; // remove 'final'
-    private Context context;           // remove 'final'
+    private final List<HostelModel> hostels;
+    private final Context context;
 
-    // Constructor initializes both fields
     public HostelAdapter(Context context, List<HostelModel> hostels) {
         this.context = context;
         this.hostels = hostels;
@@ -27,8 +26,7 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.HostelView
     @NonNull
     @Override
     public HostelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_hostel, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_hostel, parent, false);
         return new HostelViewHolder(view);
     }
 
@@ -38,7 +36,7 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.HostelView
 
         holder.hostelName.setText(hostel.getName());
         holder.hostelLocation.setText(hostel.getLocation());
-        holder.hostelImage.setImageResource(hostel.getImageResId());
+        holder.hostelImage.setImageResource(hostel.getImageResId()); // local image
 
         holder.viewDetailsBtn.setOnClickListener(v ->
                 Toast.makeText(context, "Viewing details of " + hostel.getName(), Toast.LENGTH_SHORT).show()

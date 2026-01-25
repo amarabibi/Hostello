@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- White Background -->
+    <!-- White background with rounded corners -->
     <item>
-        <color android:color="#FFFFFF"/>
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFF"/>
+            <corners
+                android:topLeftRadius="32dp"
+                android:topRightRadius="32dp"
+                android:bottomLeftRadius="32dp"
+                android:bottomRightRadius="32dp"/>
+        </shape>
     </item>
 
     <!-- Logo in center -->
     <item
         android:width="150dp"
         android:height="150dp"
-        android:drawable="@drawable/host_logo_02"
-        android:gravity="center"/>
+        android:gravity="center">
+        <bitmap
+            android:src="@drawable/host_logo_02"
+            android:gravity="center"/>
+    </item>
 
 </layer-list>

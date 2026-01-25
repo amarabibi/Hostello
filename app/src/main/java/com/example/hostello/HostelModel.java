@@ -3,7 +3,7 @@ package com.example.hostello;
 public class HostelModel {
     private String name;
     private String location;
-    private int imageResId; // use drawable resource
+    private int imageResId; // local drawable resource
 
     public HostelModel(String name, String location, int imageResId) {
         this.name = name;
@@ -11,7 +11,15 @@ public class HostelModel {
         this.imageResId = imageResId;
     }
 
-    public String getName() { return name; }
-    public String getLocation() { return location; }
-    public int getImageResId() { return imageResId; }
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getImageResId() {
+        return imageResId;
+    }
 }

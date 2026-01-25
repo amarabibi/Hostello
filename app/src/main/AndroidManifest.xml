@@ -80,10 +80,7 @@
             android:name=".NotificationDetailActivity"
             android:exported="false"
             android:theme="@style/Theme.Hostello" />
-        <activity
-            android:name=".HostelSeeder"
-            android:exported="false"
-            android:theme="@style/Theme.Hostello" />
+
     </application>
 
 </manifest>
