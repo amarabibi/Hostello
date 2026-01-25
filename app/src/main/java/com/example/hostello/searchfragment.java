@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +18,8 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private LinearLayout searchCard;
+    private View searchIcon;
+    private View searchLayout; // Use generic View to avoid type issues
     private SearchView searchView;
     private RecyclerView hostelRecyclerView;
     private HostelAdapter adapter;
@@ -32,11 +32,16 @@ public class SearchFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.searchfragment, container, false);
 
-        searchCard = view.findViewById(R.id.searchCard);
+        // Initialize views
+        searchIcon = view.findViewById(R.id.searchIcon);
+        searchLayout = view.findViewById(R.id.searchLayout);
         searchView = view.findViewById(R.id.searchView);
         hostelRecyclerView = view.findViewById(R.id.hostelRecyclerView);
 
-        // Sample hostel data with local drawable images
+        // Initially hide search layout
+        searchLayout.setVisibility(View.GONE);
+
+        // Sample hostel data
         hostelList = new ArrayList<>();
         hostelList.add(new HostelModel("Green Valley Hostel", "G-11 Markaz", R.drawable.hostel54));
         hostelList.add(new HostelModel("Sunrise Hostel", "F-10 Sector", R.drawable.hostel33));
@@ -50,11 +55,10 @@ public class SearchFragment extends Fragment {
         hostelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         hostelRecyclerView.setAdapter(adapter);
 
-        // Click on card -> show search bar + RecyclerView
-        searchCard.setOnClickListener(v -> {
-            searchCard.setVisibility(View.GONE);
-            searchView.setVisibility(View.VISIBLE);
-            hostelRecyclerView.setVisibility(View.VISIBLE);
+        // Click on search icon -> show search layout
+        searchIcon.setOnClickListener(v -> {
+            searchIcon.setVisibility(View.GONE);
+            searchLayout.setVisibility(View.VISIBLE);
         });
 
         // Search functionality

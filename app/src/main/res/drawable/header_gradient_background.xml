@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:shape="rectangle"
-    tools:ignore="ExtraText">
+    android:shape="rectangle">
 
-    <!-- Gradient background with dark blue, white, and black -->
+    <!-- Gradient background -->
     <gradient
-        android:startColor="@color/dark_blue"  <!-- Dark Blue -->
-    android:centerColor="#FFFFFF" <!-- White in the middle -->
-    android:endColor="#000000"    <!-- Black -->
-    android:angle="270"/>         <!-- Top to bottom gradient -->
+        android:type="linear"
+        android:angle="135"
+        android:centerColor="@color/dark_blue"
+        android:endColor="@color/blue"/>
 
-    <!-- Rounded bottom corners -->
+    <!-- Rounded corners -->
     <corners
-        android:topLeftRadius="0dp"
-        android:topRightRadius="0dp"
-        android:bottomLeftRadius="60dp"
-        android:bottomRightRadius="60dp"/>
+
+        android:bottomLeftRadius="30dp"
+        android:bottomRightRadius="30dp"/>
 </shape>

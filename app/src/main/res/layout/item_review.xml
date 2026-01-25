@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/button_border"
+    android:padding="12dp"
+    android:layout_marginBottom="12dp">
+
+    <!-- Reviewer name and rating -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/reviewerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="John Doe"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/reviewRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⭐ 4.5"
+            android:textSize="14sp"
+            android:textColor="@color/dark_blue"/>
+    </LinearLayout>
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/reviewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jan 25, 2026"
+        android:textSize="12sp"
+        android:textColor="@color/light_gray"
+        android:paddingTop="2dp"/>
+
+    <!-- Comment -->
+    <TextView
+        android:id="@+id/reviewComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="The hostel was amazing, clean and cozy!"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:paddingTop="6dp"/>
+</LinearLayout>

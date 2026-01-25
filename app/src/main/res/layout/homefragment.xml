@@ -152,6 +152,7 @@
                             android:src="@drawable/hostel33"/>
 
                         <TextView
+                            android:id="@+id/reviewComment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.5"
@@ -458,7 +459,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="PKR 6,000/month"
-                                    android:textColor="#4CAF50"
+                                    android:textColor="@color/dark_blue"
                                     android:textStyle="bold"
                                     android:textSize="13sp"/>
                             </LinearLayout>
@@ -618,7 +619,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:background="@drawable/rating_badge"
+                            android:background="@color/dark_blue"
                             android:padding="8dp"
                             android:layout_gravity="top|end"
                             android:layout_margin="12dp"/>
@@ -630,7 +631,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="11sp"
-                            android:background="@drawable/type_badge_pink"
+                            android:background="@color/dark_blue"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:paddingTop="5dp"
@@ -666,7 +667,7 @@
                                 android:text="PKR 15,000"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="#4CAF50"/>
+                                android:textColor="@color/dark_blue"/>
                         </LinearLayout>
 
                         <TextView
@@ -918,7 +919,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="PKR 7,500/month"
-                                    android:textColor="#4CAF50"
+                                    android:textColor="@color/dark_blue"
                                     android:textStyle="bold"
                                     android:textSize="13sp"/>
                             </LinearLayout>
@@ -1078,7 +1079,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:background="@drawable/rating_badge"
+                            android:background="@color/dark_blue"
                             android:padding="8dp"
                             android:layout_gravity="top|end"
                             android:layout_margin="12dp"/>
@@ -1090,7 +1091,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="11sp"
-                            android:background="@drawable/type_badge"
+                            android:background="@color/dark_blue"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:paddingTop="5dp"
@@ -1126,7 +1127,7 @@
                                 android:text="PKR 18,000"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="#4CAF50"/>
+                                android:textColor="@color/dark_blue"/>
                         </LinearLayout>
 
                         <TextView
@@ -1378,7 +1379,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Yes (Daily)"
-                                    android:textColor="#4CAF50"
+                                    android:textColor="@color/dark_blue"
                                     android:textStyle="bold"
                                     android:textSize="13sp"/>
                             </LinearLayout>
@@ -1538,7 +1539,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:background="@drawable/rating_badge"
+                            android:background="@color/dark_blue"
                             android:padding="8dp"
                             android:layout_gravity="top|end"
                             android:layout_margin="12dp"/>
@@ -1549,7 +1550,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="11sp"
-                            android:background="@drawable/type_badge_pink"
+                            android:background="@color/dark_blue"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:paddingTop="5dp"
@@ -1585,7 +1586,7 @@
                                 android:text="PKR 16,500"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="#4CAF50"/>
+                                android:textColor="@color/dark_blue"/>
                         </LinearLayout>
 
                         <TextView
@@ -1837,7 +1838,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="PKR 7,000/month"
-                                    android:textColor="#4CAF50"
+                                    android:textColor="@color/dark_blue"
                                     android:textStyle="bold"
                                     android:textSize="13sp"/>
                             </LinearLayout>
@@ -1997,7 +1998,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="13sp"
-                            android:background="@drawable/rating_badge"
+                            android:background="@color/dark_blue"
                             android:padding="8dp"
                             android:layout_gravity="top|end"
                             android:layout_margin="12dp"/>
@@ -2009,7 +2010,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:textSize="11sp"
-                            android:background="@drawable/type_badge"
+                            android:background="@color/dark_blue"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:paddingTop="5dp"
@@ -2045,7 +2046,7 @@
                                 android:text="PKR 10,000"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:textColor="#4CAF50"/>
+                                android:textColor="@color/dark_blue"/>
                         </LinearLayout>
 
                         <TextView

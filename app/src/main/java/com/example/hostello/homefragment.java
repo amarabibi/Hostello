@@ -318,6 +318,27 @@ public class homefragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+        // Inside onCreateView or onViewCreated
+        TextView reviewComment = view.findViewById(R.id.reviewComment);
+
+        reviewComment.setOnClickListener(v -> {
+            // Create a bundle to pass rating
+            Bundle bundle = new Bundle();
+            bundle.putString("rating", "4.5"); // replace with actual rating if dynamic
+
+            // Open ReviewFragment
+            ReviewFragment reviewFragment = new ReviewFragment();
+            reviewFragment.setArguments(bundle);
+
+            // Replace fragment
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, reviewFragment) // your container ID
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+
 
 
 
