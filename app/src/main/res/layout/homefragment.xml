@@ -152,7 +152,7 @@
                             android:src="@drawable/hostel33"/>
 
                         <TextView
-                            android:id="@+id/reviewComment"
+                            android:id="@+id/ReviewComment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.5"
@@ -193,6 +193,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName1"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -613,6 +614,7 @@
                             android:src="@drawable/hostel54"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.8"
@@ -653,6 +655,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -1073,6 +1076,7 @@
                             android:src="@drawable/hostel66"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.7"
@@ -1113,6 +1117,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -1533,6 +1538,7 @@
                             android:src="@drawable/hostel13"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.6"
@@ -1572,6 +1578,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -1992,6 +1999,7 @@
                             android:src="@drawable/hostel33"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.4"
@@ -2032,6 +2040,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName5"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -2451,6 +2460,7 @@
                             android:src="@drawable/hostel33"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.6"
@@ -2491,6 +2501,8 @@
                             android:gravity="center_vertical">
 
                             <TextView
+
+                                android:id="@+id/hostelName6"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -2910,6 +2922,7 @@
                             android:src="@drawable/hostel54"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.7"
@@ -2950,6 +2963,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName7"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -3368,6 +3382,7 @@
                             android:src="@drawable/hostel33"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment8"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.3"
@@ -3408,6 +3423,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName8"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -3826,6 +3842,7 @@
                             android:src="@drawable/hostel54"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.9"
@@ -3866,6 +3883,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName9"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -4261,6 +4279,7 @@
                             android:src="@drawable/hostel33"/>
 
                         <TextView
+                            android:id="@+id/ReviewComment10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="⭐ 4.4"
@@ -4301,6 +4320,7 @@
                             android:gravity="center_vertical">
 
                             <TextView
+                                android:id="@+id/hostelName10"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

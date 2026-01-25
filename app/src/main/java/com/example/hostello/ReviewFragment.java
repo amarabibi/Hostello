@@ -1,4 +1,4 @@
-import static java.security.AccessController.getContext;
+package com.example.hostello;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,8 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hostello.ReviewModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class ReviewFragment extends Fragment {
     private EditText reviewCommentInput;
     private Button submitReviewBtn;
 
-    private String hostelName; // selected hostel
+    private String hostelName; // Selected hostel
 
     @Nullable
     @Override
@@ -41,18 +39,17 @@ public class ReviewFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_review, container, false);
 
+        // Initialize views
         reviewRecyclerView = view.findViewById(R.id.reviewRecyclerView);
         reviewRatingBar = view.findViewById(R.id.reviewRatingBar);
         reviewCommentInput = view.findViewById(R.id.reviewCommentInput);
         submitReviewBtn = view.findViewById(R.id.submitReviewBtn);
+        TextView hostelTitle = view.findViewById(R.id.hostelName); // Make sure this exists in XML
 
-        // Get hostel info from arguments
+        // Get hostel name from arguments
         if (getArguments() != null) {
             hostelName = getArguments().getString("hostelName", "Unknown Hostel");
         }
-
-        // Display hostel name on top
-        TextView hostelTitle = view.findViewById(R.id.hostelTitle);
         hostelTitle.setText(hostelName);
 
         // Load reviews for this hostel
@@ -70,12 +67,13 @@ public class ReviewFragment extends Fragment {
     }
 
     private List<ReviewModel> getReviewsForHostel(String hostelName) {
-        // Sample data, filter by hostel
+        // Sample data with hostel name
         List<ReviewModel> allReviews = new ArrayList<>();
         allReviews.add(new ReviewModel("John Doe", "Jan 25, 2026", 4.5f, "The hostel was amazing, clean and cozy!", "Green Valley Hostel"));
         allReviews.add(new ReviewModel("Alice Smith", "Jan 20, 2026", 5.0f, "Excellent experience, very friendly staff.", "Sunrise Hostel"));
         allReviews.add(new ReviewModel("Michael", "Jan 18, 2026", 3.8f, "Decent place but a bit noisy at night.", "Green Valley Hostel"));
 
+        // Filter reviews for selected hostel
         List<ReviewModel> filtered = new ArrayList<>();
         for (ReviewModel review : allReviews) {
             if (review.getHostelName().equals(hostelName)) {
@@ -99,11 +97,13 @@ public class ReviewFragment extends Fragment {
             return;
         }
 
+        // Add new review
         ReviewModel newReview = new ReviewModel("You", "Today", rating, comment, hostelName);
         reviewList.add(0, newReview);
         reviewAdapter.notifyItemInserted(0);
         reviewRecyclerView.scrollToPosition(0);
 
+        // Reset input
         reviewRatingBar.setRating(0);
         reviewCommentInput.setText("");
 

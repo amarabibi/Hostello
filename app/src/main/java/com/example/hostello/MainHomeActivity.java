@@ -17,13 +17,13 @@ public class MainHomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
         // Default fragment
-        loadFragment(new homefragment());
+        loadFragment(new HomeFragment());
 
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
             if (item.getItemId() == R.id.nav_home) {
-                selectedFragment = new homefragment();
+                selectedFragment = new HomeFragment();
             } else if (item.getItemId() == R.id.nav_search) {
                 selectedFragment = new SearchFragment();
             } else if (item.getItemId() == R.id.nav_notification) {

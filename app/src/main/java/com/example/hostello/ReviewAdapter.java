@@ -1,68 +1,57 @@
+package com.example.hostello;
+
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder> {
+import java.util.List;
+
+public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
 
     private Context context;
-    private List<HostelModel> hostelList;
+    private List<ReviewModel> reviewList;
 
-    public HostelAdapter(Context context, List<HostelModel> hostelList) {
+    public ReviewAdapter(Context context, List<ReviewModel> reviewList) {
         this.context = context;
-        this.hostelList = hostelList;
+        this.reviewList = reviewList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_hostel, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_review, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HostelModel hostel = hostelList.get(position);
+        ReviewModel review = reviewList.get(position);
 
-        holder.hostelName.setText(hostel.getName());
-        holder.hostelAddress.setText(hostel.getAddress());
-        holder.hostelImage.setImageResource(hostel.getImageRes());
-
-        // Click on rating to open ReviewFragment
-        holder.reviewRating.setOnClickListener(v -> {
-            // Pass hostel info to ReviewFragment
-            Bundle bundle = new Bundle();
-            bundle.putString("hostelName", hostel.getName());
-            bundle.putInt("hostelId", hostel.getId()); // optional
-
-            ReviewFragment reviewFragment = new ReviewFragment();
-            reviewFragment.setArguments(bundle);
-
-            // Open fragment
-            ((FragmentActivity) context).getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, reviewFragment)
-                    .addToBackStack(null)
-                    .commit();
-        });
+        holder.reviewerName.setText(review.getReviewerName());
+        holder.reviewDate.setText(review.getDate());
+        holder.reviewComment.setText(review.getComment());
+        holder.reviewRating.setText("⭐ " + review.getRating());
     }
 
     @Override
     public int getItemCount() {
-        return hostelList.size();
+        return reviewList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView hostelImage;
-        TextView hostelName, hostelAddress, reviewRating;
+        TextView reviewerName, reviewDate, reviewComment, reviewRating;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            hostelImage = itemView.findViewById(R.id.hostelImage);
-            hostelName = itemView.findViewById(R.id.hostelName);
-            hostelAddress = itemView.findViewById(R.id.hostelAddress);
-            reviewRating = itemView.findViewById(R.id.reviewRating); // the ⭐ TextView
+            reviewerName = itemView.findViewById(R.id.reviewerName);
+            reviewDate = itemView.findViewById(R.id.reviewDate);
+            reviewComment = itemView.findViewById(R.id.reviewComment);
+            reviewRating = itemView.findViewById(R.id.reviewRating);
         }
     }
 }

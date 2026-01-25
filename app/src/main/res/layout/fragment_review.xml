@@ -20,6 +20,15 @@
         android:textColor="@color/black"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="16dp"/>
+    <TextView
+        android:id="@+id/hostelName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hostel Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="8dp"/>
+
 
     <!-- Write a Review section -->
     <LinearLayout
