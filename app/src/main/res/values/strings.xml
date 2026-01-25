@@ -49,13 +49,14 @@
     <string name="confirm_button">Confirm</string>
     <string name="terms_and_conditions">Terms and Conditions</string>
 
-
-    <string name="terms_description">By using the BuyPk app, you agree to follow our terms and confirm that all information you provide—such as name, address, and contact details—is accurate. BuyPk is designed to promote Pakistani products, and product prices, details, and availability may change without notice. All orders depend on stock availability and successful payment.\n
+    <string name="terms_description">By using the BuyPk app, you agree to follow our terms and confirm that all information you provide—such as name, address, and contact details—is accurate. BuyPk is designed to promote Pakistani products, and product prices, details, and availability may change without notice. All orders depend on stock availability and successful payment.
 
 BuyPk follows a transparent profit allocation policy where 1% of the profit from every product is donated to humanitarian aid for Gaza, and another 1% is kept by BuyPk to support and maintain the app. This structure ensures both social contribution and the smooth functioning of the platform.
-Delivery times may vary due to location, product availability, or third-party service delays, for which BuyPk is not responsible. Refunds or returns are only accepted for damaged, incorrect, or expired products reported within 24 hours of delivery along with valid proof.\n
+
+Delivery times may vary due to location, product availability, or third-party service delays, for which BuyPk is not responsible. Refunds or returns are only accepted for damaged, incorrect, or expired products reported within 24 hours of delivery along with valid proof.
+
 Your personal data is used only for processing orders, delivery, and improving the app experience. All logos, designs, and content belong to BuyPk and cannot be reused without permission. Continued use of the app means you accept any future updates to these Terms and Conditions.</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_icon">Profile Icon</string>
     <string name="notification">Notification</string>
