@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -7,7 +8,8 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Icon / Emoji -->
+
+    <!-- Icon -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,8 +24,7 @@
         android:text="Search"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/dark_blue"
-        android:letterSpacing="0.05"
+        android:textColor="#0D47A1"
         android:layout_marginBottom="6dp" />
 
     <!-- Subtitle -->
@@ -32,7 +33,41 @@
         android:layout_height="wrap_content"
         android:text="Find hostels easily"
         android:textSize="16sp"
-        android:textColor="#607D8B"
-        android:gravity="center" />
+        android:textColor="#9E9E9E"
+        android:layout_marginBottom="24dp" />
+
+
+
+    <!-- Search Bar Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/search_bar_bg"
+        android:elevation="4dp">
+
+        <!-- Search Icon -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="@color/white" />
+
+        <!-- Search Input -->
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:hint="Search for hostels..."
+            android:textColor="#FFFFFF"
+            android:textColorHint="#E3F2FD"
+            android:background="@null"
+            android:inputType="text"
+            android:imeOptions="actionSearch" />
+    </LinearLayout>
 
 </LinearLayout>
