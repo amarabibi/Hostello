@@ -22,40 +22,64 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.homefragment, container, false);
 
-        // ===== EXAMPLE: GETTING A HOSTEL CARD =====
-        LinearLayout details1 = view.findViewById(R.id.expandableDetails1);
-        TextView viewDetails1 = view.findViewById(R.id.viewDetailsBtn1);
+        // ===== LOOP TO HANDLE EXPANDABLE HOSTEL DETAILS =====
+        int totalHostels = 20; // number of hostel cards
+        for (int i = 1; i <= totalHostels; i++) {
+            int detailsId = getResources().getIdentifier("expandableDetails" + i, "id", getActivity().getPackageName());
+            int btnId = getResources().getIdentifier("viewDetailsBtn" + i, "id", getActivity().getPackageName());
 
-        viewDetails1.setOnClickListener(v -> {
-            if (details1.getVisibility() == View.GONE) {
-                details1.setVisibility(View.VISIBLE);
-                viewDetails1.setText("Hide Details");
-            } else {
-                details1.setVisibility(View.GONE);
-                viewDetails1.setText("View Details");
+            LinearLayout detailsLayout = view.findViewById(detailsId);
+            TextView viewDetailsBtn = view.findViewById(btnId);
+
+            if (detailsLayout != null && viewDetailsBtn != null) {
+                viewDetailsBtn.setOnClickListener(v -> {
+                    if (detailsLayout.getVisibility() == View.GONE) {
+                        detailsLayout.setVisibility(View.VISIBLE);
+                        viewDetailsBtn.setText("Hide Details");
+                    } else {
+                        detailsLayout.setVisibility(View.GONE);
+                        viewDetailsBtn.setText("View Details");
+                    }
+                });
             }
-        });
+        }
 
-        // ===== EXAMPLE: REVIEW COMMENT CLICK =====
-        // Make sure your TextView in XML has android:id="@+id/reviewComment1"
-        TextView reviewComment = view.findViewById(R.id.ReviewComment);
+        // ===== LOOP TO HANDLE REVIEW COMMENT CLICKS =====
+        int totalReviews = 10; // number of review comment TextViews
+        String[] hostelNames = new String[]{
+                "Green Valley Hostel",
+                "Sunrise Hostel",
+                "Blue Sky Hostel",
+                "River View Hostel",
+                "Sunset Hostel",
+                "Moonlight Hostel",
+                "Star Hostel",
+                "Ocean View Hostel",
+                "Mountain Hostel",
+                "City Hostel"
+        };
 
-        reviewComment.setOnClickListener(v -> {
-            // Create a bundle to pass hostel info
-            Bundle bundle = new Bundle();
-            bundle.putString("hostelName", "Green Valley Hostel"); // pass hostel name
+        for (int i = 1; i <= totalReviews; i++) {
+            int reviewId = getResources().getIdentifier("ReviewComment" + i, "id", getActivity().getPackageName());
+            TextView reviewComment = view.findViewById(reviewId);
 
-            // Create fragment instance and pass arguments
-            ReviewFragment reviewFragment = new ReviewFragment();
-            reviewFragment.setArguments(bundle);
+            if (reviewComment != null) {
+                final String hostelName = hostelNames[i - 1];
+                reviewComment.setOnClickListener(v -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("hostelName", hostelName);
 
-            // Open ReviewFragment
-            getParentFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, reviewFragment) // must be instance, not class
-                    .addToBackStack(null)
-                    .commit();
-        });
+                    ReviewFragment reviewFragment = new ReviewFragment();
+                    reviewFragment.setArguments(bundle);
+
+                    getParentFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_container, reviewFragment)
+                            .addToBackStack(null)
+                            .commit();
+                });
+            }
+        }
 
         // ===== USER ICON CLICK =====
         ImageView icUser = view.findViewById(R.id.ic_user);

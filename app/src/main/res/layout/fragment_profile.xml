@@ -18,7 +18,10 @@
         android:padding="20dp"
         android:clickable="true"
         android:focusable="true"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="24dp"
+        android:elevation="4dp"
+        android:clipToOutline="true"
+        android:backgroundTint="#F5F9FF">
 
         <!-- Profile Icon -->
         <TextView
@@ -47,9 +50,11 @@
         android:text="Sign Up"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="@color/dark_blue"
-        android:layout_marginBottom="12dp" />
+        android:textColor="@color/white"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/social_media_bg"
+        android:layout_marginBottom="12dp"
+        android:elevation="2dp"/>
 
     <!-- Login Button -->
     <Button
@@ -59,7 +64,151 @@
         android:text="Log In"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="@color/dark_blue" />
+        android:textColor="@color/white"
+        android:background="@drawable/social_media_bg"
+        android:backgroundTint="@color/white"
+        android:elevation="2dp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- OR divider -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#B0BEC5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  OR  "
+            android:textColor="#B0BEC5"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#B0BEC5" />
+    </LinearLayout>
+
+    <!-- Social Media Login Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+        <!-- Google -->
+        <LinearLayout
+            android:id="@+id/googleLogin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/social_media_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/google"
+                android:contentDescription="Google" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue with Google"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Facebook -->
+        <LinearLayout
+            android:id="@+id/facebookLogin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/social_media_bg"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/facebook"
+                android:contentDescription="Facebook" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue with Facebook"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Twitter -->
+        <LinearLayout
+            android:id="@+id/insta"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/social_media_bg"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/insta"
+                android:contentDescription="Twitter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue with Instagram"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+        <!-- Whatsapp -->
+        <LinearLayout
+            android:id="@+id/whatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/social_media_bg"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/whatsapp"
+                android:contentDescription="Twitter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue with WhatsApp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>
