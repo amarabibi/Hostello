@@ -57,6 +57,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
     // Firebase Realtime Database
     implementation("com.google.firebase:firebase-database:20.3.2")
-// OR Firestore
-    implementation("com.google.firebase:firebase-firestore:24.7.1")
+
 }
