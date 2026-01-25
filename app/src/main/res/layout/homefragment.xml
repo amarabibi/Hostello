@@ -514,6 +514,7 @@
                                 android:gravity="center">
 
                                 <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/callNowBtn1"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -1432,6 +1433,7 @@
                                 android:gravity="center">
 
                                 <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/callNowBtn3"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -1890,6 +1892,7 @@
                                 android:gravity="center">
 
                                 <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/callNowBtn4"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -2348,6 +2351,7 @@
                                 android:gravity="center">
 
                                 <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/callNowBtn5"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
