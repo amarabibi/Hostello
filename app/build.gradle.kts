@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -36,6 +37,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -53,4 +55,8 @@ dependencies {
     // Google Play Services for SMS Retriever
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.google.android.gms:play-services-auth-api-phone:18.0.2")
+    // Firebase Realtime Database
+    implementation("com.google.firebase:firebase-database:20.3.2")
+// OR Firestore
+    implementation("com.google.firebase:firebase-firestore:24.7.1")
 }

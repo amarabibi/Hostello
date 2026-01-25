@@ -25,7 +25,7 @@ public class MainHomeActivity extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_home) {
                 selectedFragment = new homefragment();
             } else if (item.getItemId() == R.id.nav_search) {
-                selectedFragment = new searchfragment();
+                selectedFragment = new SearchFragment();
             } else if (item.getItemId() == R.id.nav_notification) {
                 selectedFragment = new NotificationFragment();
             } else if (item.getItemId() == R.id.nav_profile) {
