@@ -38,10 +38,13 @@ public class SearchFragment extends Fragment {
 
         // Sample hostels
         hostelList = new ArrayList<>();
-        hostelList.add("Green Valley Hostel");
-        hostelList.add("Sunrise Hostel");
-        hostelList.add("Blue Sky Hostel");
-        hostelList.add("River View Hostel");
+        // Example dummy data
+        hostelList.add(String.valueOf(new HostelModel("Green Valley Hostel", "G-11 Markaz", R.drawable.hostel13)));
+        hostelList.add(String.valueOf(new HostelModel("Sunrise Hostel", "Blue Area", R.drawable.hostel33)));
+        hostelList.add(String.valueOf(new HostelModel("Blue Sky Hostel", "F-10 Markaz", R.drawable.hostel54
+        )));
+        hostelList.add(String.valueOf(new HostelModel("River View Hostel", "Sector H-8", R.drawable.hostel66)));
+
 
         filteredList = new ArrayList<>(hostelList);
 

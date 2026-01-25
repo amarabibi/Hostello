@@ -1,69 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/searchFragmentRoot"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".SearchFragment">
 
-    <!-- Search Bar (hidden by default) -->
+    <!-- Initial card to click to search -->
+    <LinearLayout
+        android:id="@+id/searchCard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@drawable/search_card_background"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Hostels"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Search bar, hidden initially -->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search hostels..."
-        android:visibility="gone" />
+        android:queryHint="Type hostel name..."
+        android:visibility="gone"
+        android:iconifiedByDefault="false"
+        android:layout_marginTop="12dp"/>
 
-    <!-- Clickable Search Card -->
-    <LinearLayout
-        android:id="@+id/searchCard"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@drawable/bg_notification_item"
-        android:padding="24dp"
-        android:layout_marginTop="50dp"
-        android:clickable="true"
-        android:focusable="true">
-
-        <!-- Icon / Emoji -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🔍"
-            android:textSize="48sp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:letterSpacing="0.05"
-            android:layout_marginBottom="6dp" />
-
-        <!-- Subtitle -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Find hostels easily"
-            android:textSize="16sp"
-            android:textColor="#607D8B"
-            android:gravity="center" />
-
-    </LinearLayout>
-
-    <!-- RecyclerView for Search Results -->
+    <!-- RecyclerView for hostels, hidden initially -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hostelRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="gone"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="12dp"/>
 </LinearLayout>
