@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HostelDetailActivity extends AppCompatActivity {
@@ -34,19 +35,19 @@ public class HostelDetailActivity extends AppCompatActivity {
         String type = getIntent().getStringExtra("type");
         String room = getIntent().getStringExtra("roomType");
         String desc = getIntent().getStringExtra("desc");
-        String mess = getIntent().getStringExtra("mess");        // Example: "Available (Optional) (PKR 6000)"
-        String phone = getIntent().getStringExtra("phone");      // Must pass phone via intent
+        String mess = getIntent().getStringExtra("mess");        // Example: "Available (PKR 6000)"
+        String phone = getIntent().getStringExtra("phone");      // Make sure to pass phone from adapter
         String imgName = getIntent().getStringExtra("image");
 
         // Set data to Views
-        nameTv.setText(name);
-        priceTv.setText(price);
-        locationTv.setText("📍 " + location);
-        typeTv.setText(type);
-        roomTv.setText("Room: " + room);
-        descTv.setText(desc);
+        nameTv.setText(name != null ? name : "");
+        priceTv.setText(price != null ? price : "");
+        locationTv.setText(location != null ? "📍 " + location : "");
+        typeTv.setText(type != null ? type : "");
+        roomTv.setText(room != null ? "Room: " + room : "");
+        descTv.setText(desc != null ? desc : "");
 
-        // Split mess into availability and charges if needed
+        // Split mess into availability and charges
         if (mess != null && mess.contains("(")) {
             int index = mess.lastIndexOf("(");
             String availability = mess.substring(0, index).trim();
@@ -54,7 +55,7 @@ public class HostelDetailActivity extends AppCompatActivity {
             messTv.setText("Availability: " + availability);
             messPriceTv.setText("Charges: " + charges);
         } else {
-            messTv.setText(mess);
+            messTv.setText(mess != null ? mess : "");
             messPriceTv.setText("");
         }
 
@@ -64,7 +65,7 @@ public class HostelDetailActivity extends AppCompatActivity {
             imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel33);
         }
 
-        // ✅ Call Now Button
+        // Call Now Button
         callNowBtn.setOnClickListener(v -> {
             if (phone != null && !phone.isEmpty()) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -72,5 +73,18 @@ public class HostelDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Embed the Reviews Fragment
+        if (savedInstanceState == null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("hostelName", name); // Pass hostel name to fragment
+
+            ReviewFragment reviewFragment = new ReviewFragment();
+            reviewFragment.setArguments(bundle);
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.reviewFragmentContainer, reviewFragment)
+                    .commit();
+        }
     }
 }

@@ -44,7 +44,7 @@ public class ReviewFragment extends Fragment {
         reviewRatingBar = view.findViewById(R.id.reviewRatingBar);
         reviewCommentInput = view.findViewById(R.id.reviewCommentInput);
         submitReviewBtn = view.findViewById(R.id.submitReviewBtn);
-        TextView hostelTitle = view.findViewById(R.id.hostelName); // Make sure this exists in XML
+        TextView hostelTitle = view.findViewById(R.id.hostelName); // Ensure this exists in XML
 
         // Get hostel name from arguments
         if (getArguments() != null) {
@@ -66,12 +66,21 @@ public class ReviewFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // You can load data from DB here if needed
+    }
+
     private List<ReviewModel> getReviewsForHostel(String hostelName) {
-        // Sample data with hostel name
+        // Sample data
         List<ReviewModel> allReviews = new ArrayList<>();
-        allReviews.add(new ReviewModel("John Doe", "Jan 25, 2026", 4.5f, "The hostel was amazing, clean and cozy!", "Green Valley Hostel"));
-        allReviews.add(new ReviewModel("Alice Smith", "Jan 20, 2026", 5.0f, "Excellent experience, very friendly staff.", "Sunrise Hostel"));
-        allReviews.add(new ReviewModel("Michael", "Jan 18, 2026", 3.8f, "Decent place but a bit noisy at night.", "Green Valley Hostel"));
+        allReviews.add(new ReviewModel("John Doe", "Jan 25, 2026", 4.5f,
+                "The hostel was amazing, clean and cozy!", "Green Valley Hostel"));
+        allReviews.add(new ReviewModel("Alice Smith", "Jan 20, 2026", 5.0f,
+                "Excellent experience, very friendly staff.", "Sunrise Hostel"));
+        allReviews.add(new ReviewModel("Michael", "Jan 18, 2026", 3.8f,
+                "Decent place but a bit noisy at night.", "Green Valley Hostel"));
 
         // Filter reviews for selected hostel
         List<ReviewModel> filtered = new ArrayList<>();
@@ -97,7 +106,7 @@ public class ReviewFragment extends Fragment {
             return;
         }
 
-        // Add new review
+        // Add new review to the top
         ReviewModel newReview = new ReviewModel("You", "Today", rating, comment, hostelName);
         reviewList.add(0, newReview);
         reviewAdapter.notifyItemInserted(0);
