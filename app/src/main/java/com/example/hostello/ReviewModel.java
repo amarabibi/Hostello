@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "reviews")
 public class ReviewModel {
     @PrimaryKey(autoGenerate = true)
-    private int id; // Room uses this to keep records unique
-
+    private int id;
     private String reviewerName;
     private String date;
     private float rating;
@@ -25,7 +24,6 @@ public class ReviewModel {
     // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
-
     public String getReviewerName() { return reviewerName; }
     public String getDate() { return date; }
     public float getRating() { return rating; }

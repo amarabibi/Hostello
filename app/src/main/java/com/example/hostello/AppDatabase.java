@@ -6,7 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 // ✅ Single @Database annotation including all entities
-@Database(entities = {Hostel.class, Notification.class, ReviewModel.class}, version = 3)
+@Database(entities = {Hostel.class, Notification.class, ReviewModel.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
