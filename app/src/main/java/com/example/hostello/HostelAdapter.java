@@ -1,27 +1,29 @@
 package com.example.hostello;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
 public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder> {
 
-    private Context context;
-    private List<HostelModel> hostelList;
+    private final List<Hostel> hostelList;
+    private final OnHostelClickListener listener;
 
-    public HostelAdapter(Context context, List<HostelModel> hostelList) {
-        this.context = context;
+    // Constructor
+    public HostelAdapter(List<Hostel> hostelList, OnHostelClickListener listener) {
         this.hostelList = hostelList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,30 +36,64 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        HostelModel hostel = hostelList.get(position);
+        Hostel h = hostelList.get(position);
 
-        holder.hostelName.setText(hostel.getName());
-        holder.hostelAddress.setText(hostel.getLocation());
-        holder.hostelImage.setImageResource(hostel.getImageResId());
+        // 🔹 Basic Info
+        holder.name.setText(h.name);
+        holder.price.setText(h.price);
+        holder.rating.setText("⭐ " + h.rating);
+        holder.type.setText(h.type);
+        holder.location.setText(h.location);
 
-        // Open Review Fragment when rating clicked
-        if (holder.reviewRating != null) {
-            holder.reviewRating.setOnClickListener(v -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("hostelName", hostel.getName());
+        // 🔹 Amenities
+        holder.amenity1.setText(h.amenity1);
+        holder.amenity2.setText(h.amenity2);
+        holder.amenity3.setText(h.amenity3);
 
-                ReviewFragment reviewFragment = new ReviewFragment();
-                reviewFragment.setArguments(bundle);
+        // 🔹 Room & Facilities
+        holder.roomVal.setText(h.roomType);
+        holder.availRooms.setText(h.availableRooms);
+        holder.facilities.setText(h.facilities);
+        holder.messAvail.setText(h.messAvailability);
+        holder.messPrice.setText(h.messCharges);
 
-                if (context instanceof FragmentActivity) {
-                    ((FragmentActivity) context).getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, reviewFragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
-            });
-        }
+        // 🔹 Contact
+        holder.phone.setText(h.phone);
+        holder.email.setText(h.email);
+
+        // 🔹 Image Handling
+        int resId = holder.itemView.getContext().getResources()
+                .getIdentifier(h.imageResourceName, "drawable",
+                        holder.itemView.getContext().getPackageName());
+        holder.hostelImg.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
+
+        // 🔹 Expand/Collapse
+        holder.expandableLayout.setVisibility(h.isExpanded ? View.VISIBLE : View.GONE);
+        holder.viewDetailsBtn.setText(h.isExpanded ? "Hide Details" : "View Full Details");
+        holder.viewDetailsBtn.setOnClickListener(v -> {
+            h.isExpanded = !h.isExpanded;
+            notifyItemChanged(position);
+        });
+
+        // 🔹 Rating Click → Open Reviews
+        holder.rating.setOnClickListener(v -> {
+            if (listener != null) listener.onReviewClick(h.name);
+        });
+
+        // 🔹 Visit Hostel Button → Open HostelDetailActivity
+        holder.visitHostelBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), HostelDetailActivity.class);
+            intent.putExtra("name", h.name);
+            intent.putExtra("price", h.price);
+            intent.putExtra("location", h.location);
+            intent.putExtra("type", h.type);
+            intent.putExtra("roomType", h.roomType);
+            intent.putExtra("desc", h.facilities);
+            intent.putExtra("mess", h.messAvailability + " (" + h.messCharges + ")");
+            intent.putExtra("phone", h.phone);
+            intent.putExtra("image", h.imageResourceName);
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -65,19 +101,53 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         return hostelList.size();
     }
 
-    // ================= VIEW HOLDER =================
+    // ✅ ViewHolder Class
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView hostelImage;
-        TextView hostelName, hostelAddress, reviewRating;
+        TextView name, price, rating, type, location;
+        TextView amenity1, amenity2, amenity3;
+        TextView roomVal, availRooms, facilities, messAvail, messPrice, phone, email;
+        ImageView hostelImg;
+        LinearLayout expandableLayout;
+        MaterialButton viewDetailsBtn, visitHostelBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            hostelImage = itemView.findViewById(R.id.hostelImage);
-            hostelName = itemView.findViewById(R.id.hostelName);
-            hostelAddress = itemView.findViewById(R.id.hostelLocation); // MUST match XML id
-            reviewRating = itemView.findViewById(R.id.reviewRating);   // MUST exist in XML
+            // Basic info
+            name = itemView.findViewById(R.id.hostelName);
+            price = itemView.findViewById(R.id.hostelPrice);
+            rating = itemView.findViewById(R.id.ratingBadge);
+            type = itemView.findViewById(R.id.typeBadge);
+            location = itemView.findViewById(R.id.hostelLocation);
+
+            // Amenities
+            amenity1 = itemView.findViewById(R.id.amenity1Text);
+            amenity2 = itemView.findViewById(R.id.amenity2Text);
+            amenity3 = itemView.findViewById(R.id.amenity3Text);
+
+            // Rooms & Facilities
+            roomVal = itemView.findViewById(R.id.roomTypeValue);
+            availRooms = itemView.findViewById(R.id.availableRoomsValue);
+            facilities = itemView.findViewById(R.id.facilitiesList);
+            messAvail = itemView.findViewById(R.id.messAvailability);
+            messPrice = itemView.findViewById(R.id.messChargesValue);
+
+            // Contact
+            phone = itemView.findViewById(R.id.contactPhone);
+            email = itemView.findViewById(R.id.contactEmail);
+
+            // Image
+            hostelImg = itemView.findViewById(R.id.hostelImage);
+
+            // Expandable layout
+            expandableLayout = itemView.findViewById(R.id.expandableDetails);
+            viewDetailsBtn = itemView.findViewById(R.id.viewDetailsBtn);
+            visitHostelBtn = itemView.findViewById(R.id.visitHostelBtn);
         }
+    }
+
+    // ✅ Click Interface for Review button
+    public interface OnHostelClickListener {
+        void onReviewClick(String hostelName);
     }
 }

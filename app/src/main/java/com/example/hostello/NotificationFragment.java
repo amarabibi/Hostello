@@ -1,56 +1,108 @@
-package com.example.hostello; // change to your package name
+package com.example.hostello;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class NotificationFragment extends Fragment {
 
-    public NotificationFragment() {
-        // Required empty public constructor
-    }
+    private RecyclerView recyclerView;
+    private AppDatabase db;
+    private NotificationAdapter adapter;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private TextView emptyTextView;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
-        View notif1 = view.findViewById(R.id.notif1);
-        View notif2 = view.findViewById(R.id.notif2);
-        View notif3 = view.findViewById(R.id.notif3);
+        // 1️⃣ Initialize DB and Views
+        db = AppDatabase.getInstance(getContext());
+        recyclerView = view.findViewById(R.id.notificationRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        notif1.setOnClickListener(v -> openDetail(
-                "Room Inspection Notice",
-                "The hostel owner will inspect rooms tomorrow at 10 AM. Please ensure your room is clean and organized.",
-                "2 hours ago"
-        ));
+        emptyTextView = view.findViewById(R.id.emptyTextView); // Optional
+        TextView clearAll = view.findViewById(R.id.markAllRead);
 
-        notif2.setOnClickListener(v -> openDetail(
-                "Water Supply Maintenance",
-                "Water supply will be unavailable from 2 PM to 5 PM due to maintenance work.",
-                "Yesterday"
-        ));
+        // 2️⃣ Clear All Notifications Click
+        clearAll.setOnClickListener(v -> clearAllNotifications());
 
-        notif3.setOnClickListener(v -> openDetail(
-                "Mess Menu Updated",
-                "The weekly mess menu has been updated. Please check the notice board for details.",
-                "2 days ago"
-        ));
+        // 3️⃣ Load notifications
+        loadNotifications();
 
         return view;
     }
 
-    private void openDetail(String title, String message, String time) {
-        Intent intent = new Intent(getActivity(), NotificationDetailActivity.class);
-        intent.putExtra("title", title);
-        intent.putExtra("message", message);
-        intent.putExtra("time", time);
-        startActivity(intent);
+    private void clearAllNotifications() {
+        executor.execute(() -> {
+            db.notificationDao().deleteAll();
+
+            if (isAdded() && getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    if (adapter != null) {
+                        adapter.updateData(new ArrayList<>());
+                        Toast.makeText(getContext(), "Notifications cleared", Toast.LENGTH_SHORT).show();
+                        emptyTextView.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+    }
+
+    private void loadNotifications() {
+        executor.execute(() -> {
+            List<Notification> list = db.notificationDao().getAllNotifications();
+
+            // Seed sample data if empty
+            if (list.isEmpty()) {
+                db.notificationDao().insert(
+                        new Notification("Room Inspection", "Owner will visit at 10 AM.", "2 hours ago"),
+                        new Notification("Mess Update", "Biryani is served today!", "Yesterday")
+                );
+                list = db.notificationDao().getAllNotifications();
+            }
+
+            final List<Notification> finalList = list;
+
+            if (isAdded() && getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    adapter = new NotificationAdapter(finalList);
+                    recyclerView.setAdapter(adapter);
+
+                    if (finalList.isEmpty()) {
+                        emptyTextView.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                    } else {
+                        emptyTextView.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        executor.shutdown();
     }
 }

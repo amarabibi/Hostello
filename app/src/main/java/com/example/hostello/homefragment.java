@@ -5,92 +5,96 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class HomeFragment extends Fragment {
 
+    private AppDatabase db;
+    private RecyclerView recyclerView;
+    private HostelAdapter adapter;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.homefragment, container, false);
 
-        // ===== LOOP TO HANDLE EXPANDABLE HOSTEL DETAILS =====
-        int totalHostels = 20; // number of hostel cards
-        for (int i = 1; i <= totalHostels; i++) {
-            int detailsId = getResources().getIdentifier("expandableDetails" + i, "id", getActivity().getPackageName());
-            int btnId = getResources().getIdentifier("viewDetailsBtn" + i, "id", getActivity().getPackageName());
+        // 1️⃣ Initialize DB
+        db = AppDatabase.getInstance(getContext());
 
-            LinearLayout detailsLayout = view.findViewById(detailsId);
-            TextView viewDetailsBtn = view.findViewById(btnId);
+        // 2️⃣ Initialize Views
+        recyclerView = view.findViewById(R.id.hostelRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-            if (detailsLayout != null && viewDetailsBtn != null) {
-                viewDetailsBtn.setOnClickListener(v -> {
-                    if (detailsLayout.getVisibility() == View.GONE) {
-                        detailsLayout.setVisibility(View.VISIBLE);
-                        viewDetailsBtn.setText("Hide Details");
-                    } else {
-                        detailsLayout.setVisibility(View.GONE);
-                        viewDetailsBtn.setText("View Details");
-                    }
-                });
-            }
-        }
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
 
-        // ===== LOOP TO HANDLE REVIEW COMMENT CLICKS =====
-        int totalReviews = 10; // number of review comment TextViews
-        String[] hostelNames = new String[]{
-                "Green Valley Hostel",
-                "Sunrise Hostel",
-                "Blue Sky Hostel",
-                "River View Hostel",
-                "Sunset Hostel",
-                "Moonlight Hostel",
-                "Star Hostel",
-                "Ocean View Hostel",
-                "Mountain Hostel",
-                "City Hostel"
-        };
-
-        for (int i = 1; i <= totalReviews; i++) {
-            int reviewId = getResources().getIdentifier("ReviewComment" + i, "id", getActivity().getPackageName());
-            TextView reviewComment = view.findViewById(reviewId);
-
-            if (reviewComment != null) {
-                final String hostelName = hostelNames[i - 1];
-                reviewComment.setOnClickListener(v -> {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("hostelName", hostelName);
-
-                    ReviewFragment reviewFragment = new ReviewFragment();
-                    reviewFragment.setArguments(bundle);
-
-                    getParentFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragment_container, reviewFragment)
-                            .addToBackStack(null)
-                            .commit();
-                });
-            }
-        }
-
-        // ===== USER ICON CLICK =====
         ImageView icUser = view.findViewById(R.id.ic_user);
         icUser.setOnClickListener(v -> {
-            getParentFragmentManager()
-                    .beginTransaction()
+            getParentFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new ProfileFragment())
                     .addToBackStack(null)
                     .commit();
         });
 
+        // 3️⃣ Pull-to-Refresh
+        swipeRefreshLayout.setOnRefreshListener(() -> loadData(() -> swipeRefreshLayout.setRefreshing(false)));
+
+        // 4️⃣ Load Data initially
+        loadData(null);
+
         return view;
+    }
+
+    private void loadData(@Nullable Runnable onComplete) {
+        executor.execute(() -> {
+            List<Hostel> hostels = db.hostelDao().getAllHostels();
+
+            // Populate DB if empty
+            if (hostels.isEmpty()) {
+                db.hostelDao().insertAll(HostelDataGenerator.getPredefinedHostels().toArray(new Hostel[0]));
+                hostels = db.hostelDao().getAllHostels();
+            }
+
+            final List<Hostel> finalHostels = hostels;
+            if (isAdded() && getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    if (adapter == null) {
+                        adapter = new HostelAdapter(finalHostels, hostelName -> {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("hostelName", hostelName);
+                            ReviewFragment rf = new ReviewFragment();
+                            rf.setArguments(bundle);
+                            getParentFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_container, rf)
+                                    .addToBackStack(null)
+                                    .commit();
+                        });
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    if (onComplete != null) onComplete.run();
+                });
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        executor.shutdown();
     }
 }

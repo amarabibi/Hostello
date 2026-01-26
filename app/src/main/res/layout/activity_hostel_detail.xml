@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA">
+
+    <!-- AppBar with Collapsing Image -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/dark_blue"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/detailHostelImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Hostel Name -->
+            <TextView
+                android:id="@+id/detailHostelName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_blue"/>
+
+            <!-- Hostel Price -->
+            <TextView
+                android:id="@+id/detailHostelPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#4CAF50"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="4dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginVertical="16dp"/>
+
+            <!-- Location -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/dark_blue"/>
+            <TextView
+                android:id="@+id/detailHostelLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#757575"
+                android:layout_marginTop="4dp"/>
+
+            <!-- Type Badge -->
+            <TextView
+                android:id="@+id/detailHostelType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_blue"
+                android:textColor="@android:color/white"
+                android:padding="4dp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Room Type -->
+            <TextView
+                android:id="@+id/detailRoomType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Mess / Food Info -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food &amp; Mess"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <!-- Mess Availability -->
+            <TextView
+                android:id="@+id/detailMessDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#616161"
+                android:layout_marginTop="4dp"/>
+
+            <!-- Mess Charges -->
+            <TextView
+                android:id="@+id/detailMessPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#616161"
+                android:layout_marginTop="2dp"/>
+
+            <!-- Description / Facilities -->
+            <TextView
+                android:id="@+id/detailHostelDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="4dp"
+                android:textColor="#616161"/>
+
+            <!-- Call Now Button -->
+            <Button
+                android:id="@+id/btnCallNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Call Now"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/dark_blue"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginVertical="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Reviews"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/dark_blue"
+            android:layout_marginBottom="12dp"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/reviewFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
