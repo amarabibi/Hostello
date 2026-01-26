@@ -26,6 +26,7 @@ public class HostelDetailActivity extends AppCompatActivity {
     private AppDatabase db;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private String hostelName;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class HostelDetailActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // Initialize Views
+        // 1️⃣ Initialize Views
         ImageView imageView = findViewById(R.id.detailHostelImage);
         TextView nameTv = findViewById(R.id.detailHostelName);
         TextView priceTv = findViewById(R.id.detailHostelPrice);
@@ -45,10 +46,13 @@ public class HostelDetailActivity extends AppCompatActivity {
         TextView messTv = findViewById(R.id.detailMessDetails);
         TextView messPriceTv = findViewById(R.id.detailMessPrice);
 
-        Button callNowBtn = findViewById(R.id.btnCallNow);
-        Button addReviewBtn = findViewById(R.id.btnAddReview); // Make sure this ID exists in your XML
+        RatingBar avgRatingBar = findViewById(R.id.detailAvgRatingBar);
+        TextView avgRatingTv = findViewById(R.id.detailAvgRatingText);
 
-        // Get data from Intent
+        Button callNowBtn = findViewById(R.id.btnCallNow);
+        Button addReviewBtn = findViewById(R.id.btnAddReview);
+
+        // 2️⃣ Get data from Intent
         hostelName = getIntent().getStringExtra("name");
         String price = getIntent().getStringExtra("price");
         String location = getIntent().getStringExtra("location");
@@ -56,10 +60,10 @@ public class HostelDetailActivity extends AppCompatActivity {
         String room = getIntent().getStringExtra("roomType");
         String desc = getIntent().getStringExtra("desc");
         String mess = getIntent().getStringExtra("mess");
-        String phone = getIntent().getStringExtra("phone");
+        phone = getIntent().getStringExtra("phone");
         String imgName = getIntent().getStringExtra("image");
 
-        // Set data to Views
+        // 3️⃣ Set basic data
         nameTv.setText(hostelName != null ? hostelName : "");
         priceTv.setText(price != null ? price : "");
         locationTv.setText(location != null ? "📍 " + location : "");
@@ -67,7 +71,7 @@ public class HostelDetailActivity extends AppCompatActivity {
         roomTv.setText(room != null ? "Room: " + room : "");
         descTv.setText(desc != null ? desc : "");
 
-        // Mess splitting logic
+        // Mess parsing
         if (mess != null && mess.contains("(")) {
             int index = mess.lastIndexOf("(");
             messTv.setText("Availability: " + mess.substring(0, index).trim());
@@ -77,13 +81,13 @@ public class HostelDetailActivity extends AppCompatActivity {
             messPriceTv.setText("");
         }
 
-        // Image loading
+        // Image
         if (imgName != null) {
             int resId = getResources().getIdentifier(imgName, "drawable", getPackageName());
             imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel33);
         }
 
-        // Call Now Click
+        // 4️⃣ Call Button
         callNowBtn.setOnClickListener(v -> {
             if (phone != null && !phone.isEmpty()) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -94,13 +98,39 @@ public class HostelDetailActivity extends AppCompatActivity {
             }
         });
 
-        // Add Review Click
+        // 5️⃣ Add Review Button
         addReviewBtn.setOnClickListener(v -> showAddReviewDialog(hostelName));
 
-        // Initial Load of Fragment
-        if (savedInstanceState == null) {
-            refreshReviews(hostelName);
-        }
+        // 6️⃣ Insert dummy reviews if empty
+        insertDummyReviews(hostelName);
+
+        // 7️⃣ Load Reviews Fragment
+        refreshReviews(hostelName);
+
+        // 8️⃣ Load Average Rating
+        executor.execute(() -> {
+            float avg = db.reviewDao().getAverageRating(hostelName).getValue();
+            runOnUiThread(() -> {
+                if (avg > 0) {
+                    avgRatingBar.setRating(avg);
+                    avgRatingTv.setText(String.format(Locale.getDefault(), "(%.1f)", avg));
+                } else {
+                    avgRatingBar.setRating(0f);
+                    avgRatingTv.setText("(No reviews)");
+                }
+            });
+        });
+    }
+
+    private void insertDummyReviews(String hName) {
+        executor.execute(() -> {
+            int count = db.reviewDao().getReviewCount(hName);
+            if (count == 0) {
+                db.reviewDao().insertReview(new ReviewModel("Ali Khan", "24 Jan 2026", 5.0f, "Best hostel in the area! Very clean.", hName));
+                db.reviewDao().insertReview(new ReviewModel("Zainab Bibi", "20 Jan 2026", 4.0f, "Great food and secure environment.", hName));
+                db.reviewDao().insertReview(new ReviewModel("Hamza Ahmed", "15 Jan 2026", 3.5f, "Good place, but the Wi-Fi is a bit slow.", hName));
+            }
+        });
     }
 
     private void showAddReviewDialog(String hName) {
@@ -121,13 +151,10 @@ public class HostelDetailActivity extends AppCompatActivity {
 
             if (!uName.isEmpty() && !comment.isEmpty()) {
                 executor.execute(() -> {
-                    ReviewModel newReview = new ReviewModel(uName, date, rating, comment, hName);
-                    db.reviewDao().insertReview(newReview);
-
+                    db.reviewDao().insertReview(new ReviewModel(uName, date, rating, comment, hName));
                     runOnUiThread(() -> {
                         dialog.dismiss();
                         Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show();
-                        refreshReviews(hName);
                     });
                 });
             } else {
@@ -143,7 +170,9 @@ public class HostelDetailActivity extends AppCompatActivity {
         ReviewFragment rf = new ReviewFragment();
         rf.setArguments(bundle);
 
-
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.reviewFragmentContainer, rf)
+                .commit();
     }
 
     @Override

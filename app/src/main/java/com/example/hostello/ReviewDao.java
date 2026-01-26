@@ -13,4 +13,8 @@ public interface ReviewDao {
 
     @Query("SELECT * FROM reviews WHERE hostelName = :name ORDER BY id DESC")
     LiveData<List<ReviewModel>> getReviewsForHostel(String name);
+    @Query("SELECT AVG(rating) FROM reviews WHERE hostelName = :name")
+    LiveData<Float> getAverageRating(String name);
+    @Query("SELECT COUNT(*) FROM reviews WHERE hostelName = :name")
+    int getReviewCount(String name);
 }
