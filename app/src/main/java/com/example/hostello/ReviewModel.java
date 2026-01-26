@@ -1,11 +1,18 @@
 package com.example.hostello;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "reviews")
 public class ReviewModel {
+    @PrimaryKey(autoGenerate = true)
+    private int id; // Room uses this to keep records unique
+
     private String reviewerName;
     private String date;
     private float rating;
     private String comment;
-    private String hostelName; // NEW
+    private String hostelName;
 
     public ReviewModel(String reviewerName, String date, float rating, String comment, String hostelName) {
         this.reviewerName = reviewerName;
@@ -15,7 +22,10 @@ public class ReviewModel {
         this.hostelName = hostelName;
     }
 
-    // getters
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+
     public String getReviewerName() { return reviewerName; }
     public String getDate() { return date; }
     public float getRating() { return rating; }

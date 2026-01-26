@@ -5,21 +5,23 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-// 1. Add Notification.class to the entities array
-@Database(entities = {Hostel.class, Notification.class}, version = 2) // Increment version to 2
+// ✅ Single @Database annotation including all entities
+@Database(entities = {Hostel.class, Notification.class, ReviewModel.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
+
     private static AppDatabase instance;
 
+    // DAOs
     public abstract HostelDao hostelDao();
-
-    // 2. Add this abstract method for the Notifications
     public abstract NotificationDao notificationDao();
+    public abstract ReviewDao reviewDao();
 
+    // Singleton instance
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "hostello_database")
-                    .fallbackToDestructiveMigration() // Helps handle the version change
+                    .fallbackToDestructiveMigration() // Handles version changes
                     .build();
         }
         return instance;
