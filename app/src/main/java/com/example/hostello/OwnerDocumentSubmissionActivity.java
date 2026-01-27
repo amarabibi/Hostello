@@ -29,8 +29,6 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
     private static final int ROOM_IMAGES_REQUEST = 1;
     private AppDatabase db;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-
-    // Default placeholder or the path to the selected image
     private String selectedImageUri = "hostel54";
 
     @Override
@@ -38,10 +36,8 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_document_submission);
 
-        // Initialize Database
         db = AppDatabase.getInstance(this);
 
-        // Initialize Views
         ivPreview = findViewById(R.id.ivPreview);
         previewCard = findViewById(R.id.previewCard);
         etHostelName = findViewById(R.id.etHostelName);
@@ -49,9 +45,8 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
         etFacilities = findViewById(R.id.etFacilities);
         btnRoomImages = findViewById(R.id.btnRoomImages);
         btnSubmit = findViewById(R.id.btnSubmit);
-        progressBar = findViewById(R.id.progressBar); // Initialize if present in XML
+        progressBar = findViewById(R.id.progressBar);
 
-        // Click Listeners
         btnRoomImages.setOnClickListener(v -> selectImages());
         btnSubmit.setOnClickListener(v -> submitForm());
     }
@@ -68,21 +63,21 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ROOM_IMAGES_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == ROOM_IMAGES_REQUEST && resultCode == RESULT_OK && data != null) {
             Uri uri = data.getData();
-            try {
-                // Take persistable permission so the image loads after app restarts
-                getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                selectedImageUri = uri.toString();
-
-                ivPreview.setImageURI(uri);
-                if (previewCard != null) {
-                    previewCard.setVisibility(View.VISIBLE);
+            if (uri != null) {
+                try {
+                    // Try to take persistable permission
+                    getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    selectedImageUri = uri.toString();
+                    ivPreview.setImageURI(uri);
+                    if (previewCard != null) previewCard.setVisibility(View.VISIBLE);
+                } catch (Exception e) {
+                    // Fallback: If persistable fails, we still use the URI for this session
+                    selectedImageUri = uri.toString();
+                    ivPreview.setImageURI(uri);
+                    Toast.makeText(this, "Note: Image link may not persist after reboot", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(this, "Image selected!", Toast.LENGTH_SHORT).show();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Permission error", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -97,16 +92,14 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
             return;
         }
 
-        // 1. UI Loading State
         ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Saving Hostel Details...");
+        progressDialog.setMessage("Updating Hostel Registry...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
         if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
         btnSubmit.setEnabled(false);
 
-        // 2. Create Object
         Hostel newHostel = new Hostel(
                 name, "Price TBD", "5.0", "Private", address,
                 "WiFi", "CCTV", "Laundry", "Standard", "Available",
@@ -114,22 +107,37 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
                 selectedImageUri
         );
 
-        // 3. Background Save
+
+
         executor.execute(() -> {
-            db.hostelDao().insertAll(newHostel);
+            try {
+                // If you are using auto-generate IDs, this creates a NEW entry.
+                // Consider using db.hostelDao().update(newHostel) if the hostel already exists.
+                db.hostelDao().insertAll(newHostel);
 
-            // Small delay so user can see the progress
-            try { Thread.sleep(800); } catch (InterruptedException e) { e.printStackTrace(); }
+                Thread.sleep(500); // Short buffer for stability
 
-            runOnUiThread(() -> {
-                progressDialog.dismiss();
-                if (progressBar != null) progressBar.setVisibility(View.GONE);
-                btnSubmit.setEnabled(true);
+                runOnUiThread(() -> {
+                    if (!isFinishing()) {
+                        progressDialog.dismiss();
+                        Toast.makeText(this, "Hostel Registered Successfully!", Toast.LENGTH_LONG).show();
 
-                Toast.makeText(this, "Hostel Registered Successfully!", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, OwnerDashboardActivity.class));
-                finish();
-            });
+                        Intent intent = new Intent(this, OwnerDashboardActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    if (!isFinishing()) {
+                        progressDialog.dismiss();
+                        btnSubmit.setEnabled(true);
+                        if (progressBar != null) progressBar.setVisibility(View.GONE);
+                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
     }
 }

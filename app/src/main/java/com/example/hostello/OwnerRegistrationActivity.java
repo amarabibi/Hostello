@@ -2,6 +2,7 @@ package com.example.hostello;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
@@ -19,9 +20,13 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_registration);
 
-        db = AppDatabase.getInstance(this);
+        try {
+            db = AppDatabase.getInstance(this);
+        } catch (Exception e) {
+            Log.e("HOSTELLO", "Database Initialization Failed: " + e.getMessage());
+            Toast.makeText(this, "Database Error. Please restart the app.", Toast.LENGTH_LONG).show();
+        }
 
-        // All variables are now TextInputEditText to match the XML tags
         TextInputEditText etName = findViewById(R.id.etName);
         TextInputEditText etPrice = findViewById(R.id.etPrice);
         TextInputEditText etLocation = findViewById(R.id.etLocation);
@@ -51,24 +56,50 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
                 return;
             }
 
-            // Using the 16-parameter constructor from your Hostel.java
+            // Creating the object
             Hostel newHostel = new Hostel(
                     name, price, "5.0", type, location,
                     a1, a2, "Laundry", roomType, "Available",
                     facilities, "Yes", "0", phone, email, "hostel54"
             );
 
+            // Using a more robust execution block
             executor.execute(() -> {
-                db.hostelDao().insertAll(newHostel);
-                runOnUiThread(() -> {
-                    Toast.makeText(this, "Hostel Listed Successfully!", Toast.LENGTH_LONG).show();
+                try {
+                    Log.d("HOSTELLO", "Attempting Insert...");
 
-                    // Switch to Dashboard
-                    Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDocumentSubmissionActivity.class);
-                    startActivity(intent);
-                    finish(); // Close the registration form
-                });
+                    // Verify DAO is not null
+                    if (db.hostelDao() == null) {
+                        throw new Exception("DAO is null. Check Database configuration.");
+                    }
+
+                    db.hostelDao().insertHostel(newHostel);
+                    Log.d("HOSTELLO", "Insert Complete!");
+
+                    runOnUiThread(() -> {
+                        Toast.makeText(OwnerRegistrationActivity.this, "Hostel Listed Successfully!", Toast.LENGTH_LONG).show();
+
+                        // Explicitly using the Activity Class Context
+                        Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDocumentSubmissionActivity.class);
+                        // Adding flags to ensure a clean navigation stack
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    });
+
+                } catch (Exception e) {
+                    Log.e("HOSTELLO", "CRASH IN EXECUTOR: " + e.getMessage(), e);
+                    runOnUiThread(() -> {
+                        Toast.makeText(OwnerRegistrationActivity.this, "Save Failed: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    });
+                }
             });
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executor.shutdown(); // Prevent memory leaks
     }
 }

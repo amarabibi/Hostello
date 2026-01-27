@@ -2,6 +2,7 @@ package com.example.hostello;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 import androidx.room.Delete;
@@ -12,7 +13,11 @@ public interface HostelDao {
 
     // --- Hostel Management Methods ---
 
-    @Insert
+    // Use REPLACE strategy to avoid crashes on primary key conflicts
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insertHostel(Hostel hostel);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Hostel... hostels);
 
     @Update
@@ -24,17 +29,19 @@ public interface HostelDao {
     @Query("DELETE FROM hostels")
     void deleteAll();
 
-    // This name matches your HomeFragment and OwnerDashboard
     @Query("SELECT * FROM hostels")
     List<Hostel> getAllHostels();
 
     @Query("SELECT * FROM hostels WHERE id = :id")
     Hostel getHostelById(int id);
 
+    // Add this to help the OwnerDashboard find their specific hostel
+    @Query("SELECT * FROM hostels WHERE email = :email LIMIT 1")
+    Hostel getHostelByEmail(String email);
 
     // --- Booking/Inquiry Methods ---
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertBooking(Booking booking);
 
     @Query("SELECT * FROM bookings ORDER BY id DESC")

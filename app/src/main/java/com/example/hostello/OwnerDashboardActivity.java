@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,8 +14,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
 
     private AppDatabase db;
     private TextView tvListingCount;
-    // 🔹 Added missing declarations here
-    private MaterialButton btnEdit, btnViewBookings, btnLogout;
+    private MaterialButton btnEdit, btnViewBookings, btnLogout, btnViewHome;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
@@ -24,49 +24,69 @@ public class OwnerDashboardActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // 🔹 Initialize all views
+        // Initialize Views
         tvListingCount = findViewById(R.id.tvListingCount);
         btnEdit = findViewById(R.id.btnEditHostel);
-        btnViewBookings = findViewById(R.id.btnViewBookings); // This was missing!
+        btnViewBookings = findViewById(R.id.btnViewBookings);
         btnLogout = findViewById(R.id.btnLogoutOwner);
+        btnViewHome = findViewById(R.id.btnViewHome); // Initialized properly
 
         // Fetch stats
         updateDashboardStats();
-// Inside onCreate...
-        MaterialButton btnViewHome = findViewById(R.id.btnViewHome);
 
+        // 1. Navigation to Home Fragment (MainActivity)
         btnViewHome.setOnClickListener(v -> {
-            // This takes the owner to the main screen where HomeFragment is hosted
             Intent intent = new Intent(OwnerDashboardActivity.this, MainHomeActivity.class);
-
-            // We use these flags so that pressing 'back' doesn't just loop between dashboard and home
+            // FLAG_ACTIVITY_REORDER_TO_FRONT is good,
+            // but FLAG_ACTIVITY_CLEAR_TOP is safer if you want a fresh Home view
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         });
-        // 🔹 Set Click Listeners
+
+        // 2. Edit Feature
         btnEdit.setOnClickListener(v -> {
             Toast.makeText(this, "Edit feature coming soon!", Toast.LENGTH_SHORT).show();
         });
 
+        // 3. View Bookings
         btnViewBookings.setOnClickListener(v -> {
-            // Navigate to the Manage Bookings screen we created
             Intent intent = new Intent(this, ManageBookingsActivity.class);
             startActivity(intent);
         });
 
+        // 4. Logout
         btnLogout.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish(); // Ensure dashboard is removed from memory
         });
     }
 
     private void updateDashboardStats() {
         executor.execute(() -> {
-            if (db.hostelDao() != null) {
-                int count = db.hostelDao().getAllHostels().size();
-                runOnUiThread(() -> tvListingCount.setText(String.valueOf(count)));
+            try {
+                if (db.hostelDao() != null) {
+                    // Fetch data in background
+                    List<Hostel> hostels = db.hostelDao().getAllHostels();
+                    int count = (hostels != null) ? hostels.size() : 0;
+
+                    // Update UI safely
+                    runOnUiThread(() -> {
+                        if (!isFinishing()) { // Check if activity is still alive
+                            tvListingCount.setText(String.valueOf(count));
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executor.shutdown(); // Clean up thread to prevent memory leaks
     }
 }
