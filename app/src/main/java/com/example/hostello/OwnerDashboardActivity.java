@@ -1,52 +1,62 @@
 package com.example.hostello;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
+import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.hostello.databinding.ActivityOwnerDashboardBinding;
+import com.google.android.material.button.MaterialButton;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class OwnerDashboardActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityOwnerDashboardBinding binding;
+    private AppDatabase db;
+    private TextView tvListingCount;
+    // 🔹 Added missing declarations here
+    private MaterialButton btnEdit, btnViewBookings, btnLogout;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_owner_dashboard);
 
-        binding = ActivityOwnerDashboardBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        db = AppDatabase.getInstance(this);
 
-        setSupportActionBar(binding.toolbar);
+        // 🔹 Initialize all views
+        tvListingCount = findViewById(R.id.tvListingCount);
+        btnEdit = findViewById(R.id.btnEditHostel);
+        btnViewBookings = findViewById(R.id.btnViewBookings); // This was missing!
+        btnLogout = findViewById(R.id.btnLogoutOwner);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_owner_dashboard);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        // Fetch stats
+        updateDashboardStats();
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
+        // 🔹 Set Click Listeners
+        btnEdit.setOnClickListener(v -> {
+            Toast.makeText(this, "Edit feature coming soon!", Toast.LENGTH_SHORT).show();
+        });
+
+        btnViewBookings.setOnClickListener(v -> {
+            // Navigate to the Manage Bookings screen we created
+            Intent intent = new Intent(this, ManageBookingsActivity.class);
+            startActivity(intent);
+        });
+
+        btnLogout.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_owner_dashboard);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+    private void updateDashboardStats() {
+        executor.execute(() -> {
+            if (db.hostelDao() != null) {
+                int count = db.hostelDao().getAllHostels().size();
+                runOnUiThread(() -> tvListingCount.setText(String.valueOf(count)));
+            }
+        });
     }
 }

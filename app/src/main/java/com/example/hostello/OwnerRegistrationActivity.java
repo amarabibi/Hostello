@@ -1,5 +1,6 @@
 package com.example.hostello;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,8 +61,12 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
             executor.execute(() -> {
                 db.hostelDao().insertAll(newHostel);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "Hostel Added Successfully!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Toast.makeText(this, "Hostel Listed Successfully!", Toast.LENGTH_LONG).show();
+
+                    // Switch to Dashboard
+                    Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDashboardActivity.class);
+                    startActivity(intent);
+                    finish(); // Close the registration form
                 });
             });
         });
