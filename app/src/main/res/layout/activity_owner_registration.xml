@@ -12,341 +12,272 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- HEADER -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp">
-
-            <ImageButton
-                android:id="@+id/back_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_back_arrow"
-                android:contentDescription="@string/back"
-                app:tint="@color/dark_blue" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Owner Registration"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/dark_blue" />
-        </RelativeLayout>
-
-        <!-- TITLE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create Owner Account"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginBottom="6dp" />
+            android:text="Hostel Registration"
+            android:textColor="#1565C0"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register your hostel in a few simple steps"
-            android:textSize="14sp"
+            android:layout_marginBottom="24dp"
+            android:text="Provide details to list your hostel on the home screen."
             android:textColor="#757575"
-            android:layout_marginBottom="24dp" />
-
-        <!-- OWNER INFORMATION -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Owner Information"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/dark_blue"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Full Name -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Full Name"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your full name"
-            android:textColorHint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/full_name_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Email -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email Address"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="12dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="example@email.com"
-            android:textColorHint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:textColorHint="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Cnic -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CNIC"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="12dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="23492-889890-7"
-            android:textColorHint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cnic_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPhonetic"
-                android:textColorHint="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <!-- Phone -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone Number"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="12dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="03XXXXXXXXX"
-            android:textColorHint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:textColorHint="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- HOSTEL DETAILS -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hostel Details"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="12dp" />
+            android:textSize="14sp" />
 
         <!-- Hostel Name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hostel Name"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue" />
+            android:layout_marginBottom="4dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter hostel name"
-            android:textColorHint="@color/black">
-
+            android:layout_marginBottom="16dp"
+            android:hint="Hostel Name">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/hostel_name_input"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@android:color/black" />
+                android:inputType="textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Address -->
+        <!-- Price -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Complete Address"
+            android:text="Price"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="12dp" />
+            android:layout_marginBottom="4dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Street, Area, City"
-            android:textColorHint="@color/black">
-
+            android:layout_marginBottom="16dp"
+            android:hint="e.g. PKR 12,000">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/address_input"
+                android:id="@+id/etPrice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="2"
-                android:inputType="textMultiLine"
-                android:textColorHint="@android:color/black" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- City -->
+        <!-- Location -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City"
+            android:text="Full Location/Address"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="12dp" />
+            android:layout_marginBottom="4dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter city"
-            android:textColorHint="@color/black">
-
+            android:layout_marginBottom="16dp"
+            android:hint="Full Location/Address">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/city_input"
+                android:id="@+id/etLocation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@android:color/black" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- ACCOUNT SECURITY -->
+        <!-- Type and Room Type Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type"
+                    android:textColor="#424242"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Boys/Girls">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Room Type"
+                    android:textColor="#424242"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="e.g. 2-Seater">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRoomType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Amenity 1 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Account Security"
+            android:text="Amenity 1"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="4dp" />
 
-        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="e.g. WiFi">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etAmenity1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Amenity 2 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="Amenity 2"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue" />
+            android:layout_marginBottom="4dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Minimum 6 characters"
-            android:textColorHint="@color/black"
-            app:passwordToggleEnabled="true">
-
+            android:layout_marginBottom="16dp"
+            android:hint="e.g. UPS">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_input"
+                android:id="@+id/etAmenity2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColorHint="@android:color/black" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Confirm Password -->
+        <!-- All Facilities -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm Password"
+            android:text="All Facilities"
+            android:textColor="#424242"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/dark_blue"
-            android:layout_marginTop="12dp" />
+            android:layout_marginBottom="4dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/BlackBorderTextInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Re-enter password"
-            android:textColorHint="@color/black"
-            app:passwordToggleEnabled="true">
-
+            android:layout_marginBottom="16dp"
+            android:hint="Comma separated">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/confirm_password_input"
+                android:id="@+id/etFacilities"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColorHint="@android:color/black" />
+                android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- TERMS -->
-        <CheckBox
-            android:id="@+id/terms_checkbox"
+        <!-- Phone Number -->
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I agree to the Terms &amp; Conditions"
-            android:textColor="#757575"
-            android:layout_marginTop="16dp" />
+            android:text="Phone Number"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
-        <!-- REGISTER BUTTON -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/registration_submit_button"
-            style="@style/FilledButtonStyle"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <TextView
-                style="@style/FilledButtonTextStyle"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Phone Number">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Submit"
-                android:textSize="16sp" />
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:id="@+id/register_button"
-            style="@style/FilledButtonStyle"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email Address -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="24dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <TextView
-                style="@style/FilledButtonTextStyle"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:hint="Email Address">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Continue"
-                android:textSize="16sp" />
-        </androidx.cardview.widget.CardView>
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Submit Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveHostel"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Save and List Hostel"
+            android:backgroundTint="#1565C0"
+            app:cornerRadius="8dp" />
 
     </LinearLayout>
 </ScrollView>

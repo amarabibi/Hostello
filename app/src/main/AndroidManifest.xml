@@ -20,10 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hostello">
         <activity
-            android:name=".HostelDetailActivity"
+            android:name=".OwnerDashboardActivity"
             android:exported="false"
             android:theme="@style/Theme.Hostello" />
-        <!-- OTP ACTIVITY -->
+        <activity
+            android:name=".HostelDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" /> <!-- OTP ACTIVITY -->
         <activity
             android:name=".OtpActivity"
             android:exported="false" /> <!-- TermsOfUse ACTIVITY -->

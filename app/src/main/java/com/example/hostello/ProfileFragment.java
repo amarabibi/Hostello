@@ -5,12 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 public class ProfileFragment extends Fragment {
 
@@ -25,10 +26,18 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // 🔹 Fixed: signup is now a Button/MaterialButton
+        View signup = view.findViewById(R.id.botn_buy_sell);
         LinearLayout googleLogin = view.findViewById(R.id.googleLogin);
         LinearLayout facebookLogin = view.findViewById(R.id.facebookLogin);
         LinearLayout instaLogin = view.findViewById(R.id.insta);
         LinearLayout whatsappLogin = view.findViewById(R.id.whatsapp);
+
+        // 🔹 Navigate to Owner Side (Registration/Intro)
+        signup.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), OwnerActivity.class);
+            startActivity(intent);
+        });
 
         // Open Google URL
         googleLogin.setOnClickListener(v -> openUrl("https://accounts.google.com/"));

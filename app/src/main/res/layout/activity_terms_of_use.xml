@@ -7,10 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    android:gravity="center_vertical"
     tools:context=".TermsOfUse">
 
-    <!-- Header Section with Back Button -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,48 +19,37 @@
             android:id="@+id/back"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="11dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/back"
             android:src="@drawable/ic_back_arrow"
             app:tint="@color/dark_blue" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/terms_and_conditions"
+            android:text="Terms &amp; Conditions"
             android:textColor="@color/dark_blue"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
-    <!-- Scrollable Terms Content -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_weight="1">
 
         <ScrollView
             android:id="@+id/terms_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="20dp"
-            android:scrollbars="vertical"
             android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:orientation="vertical">
 
-                <!-- Your Terms Content Here -->
-                <!-- Example: Last Updated -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,47 +58,43 @@
                     android:textSize="12sp"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Repeat all other TextViews for terms sections -->
                 <TextView
                     android:id="@+id/terms_desc_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/terms_description"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:lineSpacingExtra="4dp"
-                    android:layout_marginBottom="20dp" />
+                    android:lineSpacingExtra="4dp" />
 
-                <!-- Rest of terms sections go here ... -->
+                <CheckBox
+                    android:id="@+id/terms_checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="I have read and agree to these terms."
+                    android:textColor="@color/dark_blue" />
 
             </LinearLayout>
         </ScrollView>
 
-        <!-- Scroll Indicator -->
         <TextView
             android:id="@+id/scroll_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="20dp"
             android:background="#80000000"
             android:padding="12dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:text="↓ Scroll to read all terms ↓"
+            android:text="↓ Scroll to Read ↓"
             android:textColor="@android:color/white"
-            android:textSize="12sp"
-            android:visibility="visible"
-            android:elevation="4dp" />
-
+            android:visibility="visible" />
     </FrameLayout>
 
-    <!-- Action Buttons Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
         android:padding="20dp"
         android:background="@android:color/white"
         android:elevation="8dp">
@@ -123,21 +106,13 @@
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="28dp"
-            app:cardElevation="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/text_gray">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Decline"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
+                android:textColor="@android:color/white" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -147,23 +122,13 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             app:cardCornerRadius="28dp"
-            app:cardElevation="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="#1565C0">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="I Agree"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
+                android:textColor="@android:color/white" />
         </androidx.cardview.widget.CardView>
-
     </LinearLayout>
-
 </LinearLayout>
