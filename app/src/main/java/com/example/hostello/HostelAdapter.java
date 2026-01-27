@@ -19,12 +19,18 @@ import java.util.List;
 
 public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder> {
 
-    private final List<Hostel> hostelList;
+    private List<Hostel> hostelList; // Removed 'final' so we can update it
     private final OnHostelClickListener listener;
 
+    // Fixed Constructor: Removed the extra 'String phone' to match your HomeFragment call
     public HostelAdapter(List<Hostel> hostelList, OnHostelClickListener listener) {
         this.hostelList = hostelList;
         this.listener = listener;
+    }
+
+    // Method to update data during Refresh
+    public void setHostels(List<Hostel> newList) {
+        this.hostelList = newList;
     }
 
     @NonNull
@@ -58,17 +64,17 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         holder.messAvail.setText(h.messAvailability);
         holder.messPrice.setText(h.messCharges);
 
-        // 🔹 Contact
+        // 🔹 Contact Info
         holder.phone.setText(h.phone);
         holder.email.setText(h.email);
 
-        // 🔹 Image
+        // 🔹 Image Handling
         int resId = holder.itemView.getContext().getResources()
                 .getIdentifier(h.imageResourceName, "drawable",
                         holder.itemView.getContext().getPackageName());
         holder.hostelImg.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
 
-        // 🔹 Expand/Collapse
+        // 🔹 Expand/Collapse Logic
         holder.expandableLayout.setVisibility(h.isExpanded ? View.VISIBLE : View.GONE);
         holder.viewDetailsBtn.setText(h.isExpanded ? "Hide Details" : "View Full Details");
         holder.viewDetailsBtn.setOnClickListener(v -> {
@@ -81,42 +87,31 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
             if (listener != null) listener.onReviewClick(h.name);
         });
 
-        // 🔹 Visit Hostel Button → Open Detail Screen
+        // 🔹 Visit Hostel Button → Open Detail Activity
         holder.visitHostelBtn.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), HostelDetailActivity.class);
             intent.putExtra("name", h.name);
-            intent.putExtra("price", h.price);
-            intent.putExtra("location", h.location);
-            intent.putExtra("type", h.type);
-            intent.putExtra("roomType", h.roomType);
-            intent.putExtra("desc", h.facilities);
-            intent.putExtra("mess", h.messAvailability + " (" + h.messCharges + ")");
             intent.putExtra("phone", h.phone);
-            intent.putExtra("email", h.email);
-            intent.putExtra("image", h.imageResourceName);
             v.getContext().startActivity(intent);
         });
 
-        // 📞 Click Phone → Open Dialer
-        holder.phone.setOnClickListener(v -> {
+        // 🔹 FIXED: Call Button Logic
+        holder.callNowBtn.setOnClickListener(v -> {
             if (h.phone != null && !h.phone.isEmpty()) {
-                Intent dialIntent = new Intent(Intent.ACTION_DIAL);
-                dialIntent.setData(Uri.parse("tel:" + h.phone));
-                v.getContext().startActivity(dialIntent);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + h.phone));
+                v.getContext().startActivity(intent);
             } else {
-                Toast.makeText(v.getContext(), "Phone number not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Phone not available", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // 📧 Click Email → Open Email App
+        // 📧 Email Logic
         holder.email.setOnClickListener(v -> {
             if (h.email != null && !h.email.isEmpty()) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:" + h.email));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hostel Inquiry");
                 v.getContext().startActivity(emailIntent);
-            } else {
-                Toast.makeText(v.getContext(), "Email not available", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -132,35 +127,32 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         TextView roomVal, availRooms, facilities, messAvail, messPrice, phone, email;
         ImageView hostelImg;
         LinearLayout expandableLayout;
-        MaterialButton viewDetailsBtn, visitHostelBtn;
+        MaterialButton viewDetailsBtn, visitHostelBtn, callNowBtn; // Added callNowBtn
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             name = itemView.findViewById(R.id.hostelName);
             price = itemView.findViewById(R.id.hostelPrice);
             rating = itemView.findViewById(R.id.ratingBadge);
             type = itemView.findViewById(R.id.typeBadge);
             location = itemView.findViewById(R.id.hostelLocation);
-
             amenity1 = itemView.findViewById(R.id.amenity1Text);
             amenity2 = itemView.findViewById(R.id.amenity2Text);
             amenity3 = itemView.findViewById(R.id.amenity3Text);
-
             roomVal = itemView.findViewById(R.id.roomTypeValue);
             availRooms = itemView.findViewById(R.id.availableRoomsValue);
             facilities = itemView.findViewById(R.id.facilitiesList);
             messAvail = itemView.findViewById(R.id.messAvailability);
             messPrice = itemView.findViewById(R.id.messChargesValue);
-
             phone = itemView.findViewById(R.id.contactPhone);
             email = itemView.findViewById(R.id.contactEmail);
-
             hostelImg = itemView.findViewById(R.id.hostelImage);
-
             expandableLayout = itemView.findViewById(R.id.expandableDetails);
             viewDetailsBtn = itemView.findViewById(R.id.viewDetailsBtn);
             visitHostelBtn = itemView.findViewById(R.id.visitHostelBtn);
+
+            // Make sure this ID exists in your item_hostel.xml
+            callNowBtn = itemView.findViewById(R.id.btnCallNow);
         }
     }
 
