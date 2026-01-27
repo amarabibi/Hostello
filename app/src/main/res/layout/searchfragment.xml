@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:queryHint="Type hostel name..."
+            android:textColor="@color/black"
             android:iconifiedByDefault="false"/>
 
         <!-- RecyclerView for hostel list -->

@@ -1,74 +1,67 @@
 package com.example.hostello;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotifViewHolder> {
 
-    private List<Notification> notifications;
+    private List<Notification> notificationList;
 
-    public NotificationAdapter(List<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
-    // ✅ Update the data in the adapter
-    public void updateData(List<Notification> newList) {
-        this.notifications = newList;
-        notifyDataSetChanged(); // Refresh the RecyclerView
+    public NotificationAdapter(List<Notification> notificationList) {
+        this.notificationList = notificationList;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_notification, parent, false);
-        return new ViewHolder(view);
+    public NotifViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notification, parent, false);
+        return new NotifViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Notification n = notifications.get(position);
+    public void onBindViewHolder(@NonNull NotifViewHolder holder, int position) {
+        Notification notif = notificationList.get(position);
 
-        holder.title.setText(n.title);
-        holder.message.setText(n.message);
-        holder.time.setText(n.timeStamp);
+        holder.tvTitle.setText(notif.title);
+        holder.tvMessage.setText(notif.message);
+        holder.tvTime.setText(notif.time);
 
-        // Dim the indicator if read
-        holder.indicator.setAlpha(n.isRead ? 0.2f : 1.0f);
+        // UI state for unread notifications
+        holder.statusIndicator.setVisibility(notif.isRead ? View.GONE : View.VISIBLE);
+        holder.itemView.setAlpha(notif.isRead ? 0.7f : 1.0f);
 
-        // ✅ Click listener to open NotificationDetailActivity
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), NotificationDetailActivity.class);
-            intent.putExtra("title", n.title);
-            intent.putExtra("message", n.message);
-            intent.putExtra("time", n.timeStamp);
-            v.getContext().startActivity(intent);
+            if (!notif.isRead) {
+                notif.isRead = true;
+                notifyItemChanged(position);
+                // Note: You should also update the DB state here via a callback or DAO
+            }
         });
     }
 
     @Override
     public int getItemCount() {
-        return notifications != null ? notifications.size() : 0;
+        return notificationList != null ? notificationList.size() : 0;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, message, time;
-        View indicator;
+    public static class NotifViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvMessage, tvTime;
+        View statusIndicator;
+        ImageView notifIcon;
 
-        public ViewHolder(@NonNull View itemView) {
+        public NotifViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.notifTitle);
-            message = itemView.findViewById(R.id.notifMessage);
-            time = itemView.findViewById(R.id.notifTime);
-            indicator = itemView.findViewById(R.id.statusIndicator); // Must exist in XML
+            tvTitle = itemView.findViewById(R.id.notifTitle);
+            tvMessage = itemView.findViewById(R.id.notifMessage);
+            tvTime = itemView.findViewById(R.id.notifTime);
+            statusIndicator = itemView.findViewById(R.id.statusIndicator);
+            notifIcon = itemView.findViewById(R.id.notifIcon);
         }
     }
 }

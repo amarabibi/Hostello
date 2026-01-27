@@ -98,6 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textCapWords"
+                        android:textColor="@color/black"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,6 +126,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
+                        android:textColor="@color/black"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -151,6 +153,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPostalAddress"
+                        android:textColor="@color/black"
                         android:minLines="2"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -277,7 +280,7 @@
                     android:layout_marginBottom="18dp"
                     android:hint="e.g. WiFi, AC, Generator"
                     app:boxStrokeColor="#1565C0"
-                    app:hintTextColor="#1565C0">
+                    app:hintTextColor="@color/black">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etAmenity1"
                         android:layout_width="match_parent"
@@ -302,12 +305,14 @@
                     android:layout_marginBottom="18dp"
                     android:hint="e.g. UPS, Hot Water, Parking"
                     app:boxStrokeColor="#1565C0"
-                    app:hintTextColor="#1565C0">
+                    app:hintTextColor="@color/black">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etAmenity2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp" />
+                        android:padding="16dp"
+                        android:textColor="@color/black"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- All Facilities -->
@@ -334,6 +339,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minLines="2"
+                        android:textColor="@color/black"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -377,6 +383,7 @@
                         android:id="@+id/etPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:inputType="phone"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -403,6 +410,7 @@
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:inputType="textEmailAddress"
                         android:padding="16dp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -412,7 +420,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="* Required fields"
-                    android:textColor="#757575"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     android:layout_marginBottom="16dp"
                     android:layout_gravity="center" />

@@ -28,41 +28,30 @@ public class NotificationFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notification, container, false);
 
-        // 1️⃣ Initialize DB and Views
-        db = AppDatabase.getInstance(getContext());
+        db = AppDatabase.getInstance(requireContext());
         recyclerView = view.findViewById(R.id.notificationRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        emptyTextView = view.findViewById(R.id.emptyTextView);
 
-        emptyTextView = view.findViewById(R.id.emptyTextView); // Optional
         TextView clearAll = view.findViewById(R.id.markAllRead);
-
-        // 2️⃣ Clear All Notifications Click
         clearAll.setOnClickListener(v -> clearAllNotifications());
 
-        // 3️⃣ Load notifications
         loadNotifications();
-
         return view;
     }
 
     private void clearAllNotifications() {
         executor.execute(() -> {
             db.notificationDao().deleteAll();
-
-            if (isAdded() && getActivity() != null) {
-                getActivity().runOnUiThread(() -> {
-                    if (adapter != null) {
-                        adapter.updateData(new ArrayList<>());
-                        Toast.makeText(getContext(), "Notifications cleared", Toast.LENGTH_SHORT).show();
-                        emptyTextView.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.GONE);
-                    }
+            if (isAdded()) {
+                requireActivity().runOnUiThread(() -> {
+                    adapter = new NotificationAdapter(new ArrayList<>());
+                    recyclerView.setAdapter(adapter);
+                    updateVisibility(true);
+                    Toast.makeText(getContext(), "All notifications cleared", Toast.LENGTH_SHORT).show();
                 });
             }
         });
@@ -70,34 +59,35 @@ public class NotificationFragment extends Fragment {
 
     private void loadNotifications() {
         executor.execute(() -> {
-            List<Notification> list = db.notificationDao().getAllNotifications();
+            List<Notification> listFromDb = db.notificationDao().getAllNotifications();
 
-            // Seed sample data if empty
-            if (list.isEmpty()) {
-                db.notificationDao().insert(
-                        new Notification("Room Inspection", "Owner will visit at 10 AM.", "2 hours ago"),
-                        new Notification("Mess Update", "Biryani is served today!", "Yesterday")
-                );
-                list = db.notificationDao().getAllNotifications();
+            // Seed dummy data if DB is empty
+            if (listFromDb == null || listFromDb.isEmpty()) {
+                db.notificationDao().insert(new Notification("Welcome to Hostello!", "Find your best stay today.", "Just now", false));
+                db.notificationDao().insert(new Notification("Security Alert", "New login detected on your account.", "2h ago", false));
+                listFromDb = db.notificationDao().getAllNotifications();
             }
 
-            final List<Notification> finalList = list;
+            final List<Notification> finalList = (listFromDb != null) ? listFromDb : new ArrayList<>();
 
-            if (isAdded() && getActivity() != null) {
-                getActivity().runOnUiThread(() -> {
+            if (isAdded()) {
+                requireActivity().runOnUiThread(() -> {
                     adapter = new NotificationAdapter(finalList);
                     recyclerView.setAdapter(adapter);
-
-                    if (finalList.isEmpty()) {
-                        emptyTextView.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.GONE);
-                    } else {
-                        emptyTextView.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                    }
+                    updateVisibility(finalList.isEmpty());
                 });
             }
         });
+    }
+
+    private void updateVisibility(boolean isEmpty) {
+        if (isEmpty) {
+            emptyTextView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            emptyTextView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
