@@ -275,7 +275,7 @@
             android:id="@+id/btnSaveHostel"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Save and List Hostel"
+            android:text="Save and Continue"
             android:backgroundTint="#1565C0"
             app:cornerRadius="8dp" />
 

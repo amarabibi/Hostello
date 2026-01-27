@@ -1,5 +1,6 @@
 package com.example.hostello;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Hostel h = hostelList.get(position);
+        Context context = holder.itemView.getContext();
 
         // 🔹 Basic Info
         holder.name.setText(h.name);
@@ -67,11 +69,15 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         holder.phone.setText(h.phone);
         holder.email.setText(h.email);
 
-        // 🔹 Image Handling
-        int resId = holder.itemView.getContext().getResources()
-                .getIdentifier(h.imageResourceName, "drawable",
-                        holder.itemView.getContext().getPackageName());
-        holder.hostelImg.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
+        // 🔹 FIXED: Integrated Image Handling
+        if (h.imageResourceName != null && h.imageResourceName.startsWith("content://")) {
+            // This is a Gallery URI from the Owner's submission
+            holder.hostelImg.setImageURI(Uri.parse(h.imageResourceName));
+        } else {
+            // This is a Drawable resource name (like "hostel54")
+            int resId = context.getResources().getIdentifier(h.imageResourceName, "drawable", context.getPackageName());
+            holder.hostelImg.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
+        }
 
         // 🔹 Expand/Collapse Logic
         holder.expandableLayout.setVisibility(h.isExpanded ? View.VISIBLE : View.GONE);
@@ -86,20 +92,20 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
             if (listener != null) listener.onReviewClick(h.name);
         });
 
-        // 🔹 Visit Hostel Button → PASSING ALL DATA NOW
+        // 🔹 Visit Hostel Button
         holder.visitHostelBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), HostelDetailActivity.class);
+            Intent intent = new Intent(context, HostelDetailActivity.class);
             intent.putExtra("name", h.name);
             intent.putExtra("price", h.price);
             intent.putExtra("location", h.location);
             intent.putExtra("type", h.type);
             intent.putExtra("roomType", h.roomType);
-            intent.putExtra("desc", h.facilities); // Make sure your Activity uses "desc"
+            intent.putExtra("desc", h.facilities);
             intent.putExtra("mess", h.messAvailability + " (" + h.messCharges + ")");
             intent.putExtra("phone", h.phone);
             intent.putExtra("email", h.email);
             intent.putExtra("image", h.imageResourceName);
-            v.getContext().startActivity(intent);
+            context.startActivity(intent);
         });
 
         // 🔹 Call Button Logic
@@ -107,9 +113,9 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
             if (h.phone != null && !h.phone.isEmpty()) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" + h.phone));
-                v.getContext().startActivity(intent);
+                context.startActivity(intent);
             } else {
-                Toast.makeText(v.getContext(), "Phone not available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Phone not available", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,7 +124,7 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
             if (h.email != null && !h.email.isEmpty()) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:" + h.email));
-                v.getContext().startActivity(emailIntent);
+                context.startActivity(emailIntent);
             }
         });
     }

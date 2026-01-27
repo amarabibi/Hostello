@@ -64,7 +64,7 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
                     Toast.makeText(this, "Hostel Listed Successfully!", Toast.LENGTH_LONG).show();
 
                     // Switch to Dashboard
-                    Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDashboardActivity.class);
+                    Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDocumentSubmissionActivity.class);
                     startActivity(intent);
                     finish(); // Close the registration form
                 });

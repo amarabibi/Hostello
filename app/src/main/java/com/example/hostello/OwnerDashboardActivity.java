@@ -32,7 +32,17 @@ public class OwnerDashboardActivity extends AppCompatActivity {
 
         // Fetch stats
         updateDashboardStats();
+// Inside onCreate...
+        MaterialButton btnViewHome = findViewById(R.id.btnViewHome);
 
+        btnViewHome.setOnClickListener(v -> {
+            // This takes the owner to the main screen where HomeFragment is hosted
+            Intent intent = new Intent(OwnerDashboardActivity.this, MainHomeActivity.class);
+
+            // We use these flags so that pressing 'back' doesn't just loop between dashboard and home
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        });
         // 🔹 Set Click Listeners
         btnEdit.setOnClickListener(v -> {
             Toast.makeText(this, "Edit feature coming soon!", Toast.LENGTH_SHORT).show();
