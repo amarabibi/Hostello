@@ -19,18 +19,17 @@ import java.util.List;
 
 public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder> {
 
-    private List<Hostel> hostelList; // Removed 'final' so we can update it
+    private List<Hostel> hostelList;
     private final OnHostelClickListener listener;
 
-    // Fixed Constructor: Removed the extra 'String phone' to match your HomeFragment call
     public HostelAdapter(List<Hostel> hostelList, OnHostelClickListener listener) {
         this.hostelList = hostelList;
         this.listener = listener;
     }
 
-    // Method to update data during Refresh
     public void setHostels(List<Hostel> newList) {
         this.hostelList = newList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -87,15 +86,23 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
             if (listener != null) listener.onReviewClick(h.name);
         });
 
-        // 🔹 Visit Hostel Button → Open Detail Activity
+        // 🔹 Visit Hostel Button → PASSING ALL DATA NOW
         holder.visitHostelBtn.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), HostelDetailActivity.class);
             intent.putExtra("name", h.name);
+            intent.putExtra("price", h.price);
+            intent.putExtra("location", h.location);
+            intent.putExtra("type", h.type);
+            intent.putExtra("roomType", h.roomType);
+            intent.putExtra("desc", h.facilities); // Make sure your Activity uses "desc"
+            intent.putExtra("mess", h.messAvailability + " (" + h.messCharges + ")");
             intent.putExtra("phone", h.phone);
+            intent.putExtra("email", h.email);
+            intent.putExtra("image", h.imageResourceName);
             v.getContext().startActivity(intent);
         });
 
-        // 🔹 FIXED: Call Button Logic
+        // 🔹 Call Button Logic
         holder.callNowBtn.setOnClickListener(v -> {
             if (h.phone != null && !h.phone.isEmpty()) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -118,7 +125,7 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return hostelList.size();
+        return hostelList != null ? hostelList.size() : 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -127,7 +134,7 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
         TextView roomVal, availRooms, facilities, messAvail, messPrice, phone, email;
         ImageView hostelImg;
         LinearLayout expandableLayout;
-        MaterialButton viewDetailsBtn, visitHostelBtn, callNowBtn; // Added callNowBtn
+        MaterialButton viewDetailsBtn, visitHostelBtn, callNowBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -150,8 +157,6 @@ public class HostelAdapter extends RecyclerView.Adapter<HostelAdapter.ViewHolder
             expandableLayout = itemView.findViewById(R.id.expandableDetails);
             viewDetailsBtn = itemView.findViewById(R.id.viewDetailsBtn);
             visitHostelBtn = itemView.findViewById(R.id.visitHostelBtn);
-
-            // Make sure this ID exists in your item_hostel.xml
             callNowBtn = itemView.findViewById(R.id.btnCallNow);
         }
     }

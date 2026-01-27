@@ -64,14 +64,13 @@ public class HostelDetailActivity extends AppCompatActivity {
         String imgName = getIntent().getStringExtra("image");
 
         // 3️⃣ Set basic data
-        nameTv.setText(hostelName != null ? hostelName : "");
+        nameTv.setText(hostelName != null ? hostelName : "Hostel Details");
         priceTv.setText(price != null ? price : "");
         locationTv.setText(location != null ? "📍 " + location : "");
         typeTv.setText(type != null ? type : "");
         roomTv.setText(room != null ? "Room: " + room : "");
         descTv.setText(desc != null ? desc : "");
 
-        // Mess parsing
         if (mess != null && mess.contains("(")) {
             int index = mess.lastIndexOf("(");
             messTv.setText("Availability: " + mess.substring(0, index).trim());
@@ -81,10 +80,9 @@ public class HostelDetailActivity extends AppCompatActivity {
             messPriceTv.setText("");
         }
 
-        // Image
         if (imgName != null) {
             int resId = getResources().getIdentifier(imgName, "drawable", getPackageName());
-            imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel33);
+            imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
         }
 
         // 4️⃣ Call Button
@@ -101,24 +99,20 @@ public class HostelDetailActivity extends AppCompatActivity {
         // 5️⃣ Add Review Button
         addReviewBtn.setOnClickListener(v -> showAddReviewDialog(hostelName));
 
-        // 6️⃣ Insert dummy reviews if empty
+        // 6️⃣ Initialize Data
         insertDummyReviews(hostelName);
-
-        // 7️⃣ Load Reviews Fragment
         refreshReviews(hostelName);
 
-        // 8️⃣ Load Average Rating
-        executor.execute(() -> {
-            float avg = db.reviewDao().getAverageRating(hostelName).getValue();
-            runOnUiThread(() -> {
-                if (avg > 0) {
-                    avgRatingBar.setRating(avg);
-                    avgRatingTv.setText(String.format(Locale.getDefault(), "(%.1f)", avg));
-                } else {
-                    avgRatingBar.setRating(0f);
-                    avgRatingTv.setText("(No reviews)");
-                }
-            });
+        // 7️⃣ FIXED: Load Average Rating using LiveData Observer
+        // Remove the executor for the rating observation
+        db.reviewDao().getAverageRating(hostelName).observe(this, avg -> {
+            if (avg != null && avg > 0) {
+                avgRatingBar.setRating(avg);
+                avgRatingTv.setText(String.format(Locale.getDefault(), "(%.1f)", avg));
+            } else {
+                avgRatingBar.setRating(0f);
+                avgRatingTv.setText("(No reviews)");
+            }
         });
     }
 
@@ -126,9 +120,8 @@ public class HostelDetailActivity extends AppCompatActivity {
         executor.execute(() -> {
             int count = db.reviewDao().getReviewCount(hName);
             if (count == 0) {
-                db.reviewDao().insertReview(new ReviewModel("Ali Khan", "24 Jan 2026", 5.0f, "Best hostel in the area! Very clean.", hName));
-                db.reviewDao().insertReview(new ReviewModel("Zainab Bibi", "20 Jan 2026", 4.0f, "Great food and secure environment.", hName));
-                db.reviewDao().insertReview(new ReviewModel("Hamza Ahmed", "15 Jan 2026", 3.5f, "Good place, but the Wi-Fi is a bit slow.", hName));
+                db.reviewDao().insertReview(new ReviewModel("Ali Khan", "24 Jan 2026", 5.0f, "Best hostel in the area!", hName));
+                db.reviewDao().insertReview(new ReviewModel("Zainab Bibi", "20 Jan 2026", 4.0f, "Great food and secure.", hName));
             }
         });
     }
@@ -155,6 +148,7 @@ public class HostelDetailActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         dialog.dismiss();
                         Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show();
+                        // refreshReviews(hName); // Fragment handles itself if using LiveData
                     });
                 });
             } else {
@@ -165,6 +159,9 @@ public class HostelDetailActivity extends AppCompatActivity {
     }
 
     private void refreshReviews(String hName) {
+        // Ensure fragment transaction is safe
+        if (isFinishing()) return;
+
         Bundle bundle = new Bundle();
         bundle.putString("hostelName", hName);
         ReviewFragment rf = new ReviewFragment();
@@ -178,6 +175,8 @@ public class HostelDetailActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        executor.shutdown();
+        if (!executor.isShutdown()) {
+            executor.shutdown();
+        }
     }
 }

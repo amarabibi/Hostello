@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     private List<ReviewModel> reviewList;
 
     public ReviewAdapter(Context context, List<ReviewModel> reviewList) {
@@ -33,7 +33,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (reviewList == null) return;
+
         ReviewModel review = reviewList.get(position);
+
+        // Fixed: Changed getUserName() to getReviewerName() to match your ReviewModel
         holder.name.setText(review.getReviewerName());
         holder.date.setText(review.getDate());
         holder.comment.setText(review.getComment());
