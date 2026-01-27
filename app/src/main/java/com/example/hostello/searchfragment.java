@@ -46,25 +46,28 @@ public class SearchFragment extends Fragment {
 
         searchLayout.setVisibility(View.GONE);
 
-        // 🔹 Load predefined hostel data
+        // 1️⃣ Load predefined data (Clear first to prevent duplicates on fragment reload)
+        hostelList.clear();
         hostelList.addAll(HostelDataGenerator.getPredefinedHostels());
+
+        filteredList.clear();
         filteredList.addAll(hostelList);
 
-        adapter = new HostelAdapter(filteredList, hostelName -> {
-            // You can open review screen here later
-        });
+        // 2️⃣ FIXED CONSTRUCTOR: Matches (Context, List)
+        adapter = new HostelAdapter(getContext(), filteredList);
 
         hostelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         hostelRecyclerView.setAdapter(adapter);
 
-        // 🔍 Show search bar
+        // 3️⃣ Search bar toggle
         searchIcon.setOnClickListener(v -> {
             searchIcon.setVisibility(View.GONE);
             searchLayout.setVisibility(View.VISIBLE);
+            searchView.setIconified(false); // Opens search bar immediately
             searchView.requestFocus();
         });
 
-        // 🔎 Search logic
+        // 4️⃣ Search logic
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -83,19 +86,24 @@ public class SearchFragment extends Fragment {
     }
 
     private void filterHostels(String query) {
-        filteredList.clear();
+        List<Hostel> tempResultList = new ArrayList<>();
 
         if (TextUtils.isEmpty(query)) {
-            filteredList.addAll(hostelList);
+            tempResultList.addAll(hostelList);
         } else {
+            String lowerCaseQuery = query.toLowerCase().trim();
             for (Hostel hostel : hostelList) {
-                if (hostel.name.toLowerCase().contains(query.toLowerCase())
-                        || hostel.location.toLowerCase().contains(query.toLowerCase())) {
-                    filteredList.add(hostel);
+                if (hostel.name.toLowerCase().contains(lowerCaseQuery)
+                        || hostel.location.toLowerCase().contains(lowerCaseQuery)) {
+                    tempResultList.add(hostel);
                 }
             }
         }
 
-        adapter.notifyDataSetChanged();
+        // Update the adapter using the method we added earlier
+        if (adapter != null) {
+            adapter.setHostels(tempResultList);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

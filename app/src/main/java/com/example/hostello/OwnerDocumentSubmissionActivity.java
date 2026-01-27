@@ -1,35 +1,33 @@
 package com.example.hostello;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
 
-    private ImageView ivPreview;
-    private CardView previewCard;
-    private EditText etHostelName, etHostelAddress, etFacilities;
-    private Button btnRoomImages, btnSubmit;
-    private ProgressBar progressBar;
+    private static final int ROOM_IMAGES = 1;
+    private static final int FURNITURE_IMAGES = 2;
+    private static final int FACILITY_IMAGES = 3;
 
-    private static final int ROOM_IMAGES_REQUEST = 1;
+    private TextInputEditText etHostelName, etHostelAddress, etFacilities;
+    private TextView tvRoomCount, tvFurnitureCount, tvFacilityCount;
+    private String mainImageUri = ""; // We'll use the first room image as the main display
+
     private AppDatabase db;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private String selectedImageUri = "hostel54";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,47 +36,71 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        ivPreview = findViewById(R.id.ivPreview);
-        previewCard = findViewById(R.id.previewCard);
+        // Initialize Input Fields
         etHostelName = findViewById(R.id.etHostelName);
         etHostelAddress = findViewById(R.id.etHostelAddress);
         etFacilities = findViewById(R.id.etFacilities);
-        btnRoomImages = findViewById(R.id.btnRoomImages);
-        btnSubmit = findViewById(R.id.btnSubmit);
-        progressBar = findViewById(R.id.progressBar);
 
-        btnRoomImages.setOnClickListener(v -> selectImages());
+        // Initialize Count TextViews
+        tvRoomCount = findViewById(R.id.tvRoomImagesCount);
+        tvFurnitureCount = findViewById(R.id.tvFurnitureImagesCount);
+        tvFacilityCount = findViewById(R.id.tvFacilityImagesCount);
+
+        // Initialize Buttons
+        Button btnRoom = findViewById(R.id.btnRoomImages);
+        Button btnFurniture = findViewById(R.id.btnFurnitureImages);
+        Button btnFacility = findViewById(R.id.btnFacilityImages);
+        Button btnSubmit = findViewById(R.id.btnSubmit);
+
+        // Set Click Listeners
+        btnRoom.setOnClickListener(v -> selectImages(ROOM_IMAGES));
+        btnFurniture.setOnClickListener(v -> selectImages(FURNITURE_IMAGES));
+        btnFacility.setOnClickListener(v -> selectImages(FACILITY_IMAGES));
+
         btnSubmit.setOnClickListener(v -> submitForm());
     }
 
-    private void selectImages() {
+    private void selectImages(int requestCode) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        startActivityForResult(intent, ROOM_IMAGES_REQUEST);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true); // Allow multiple selection
+        startActivityForResult(intent, requestCode);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ROOM_IMAGES_REQUEST && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                try {
-                    // Try to take persistable permission
-                    getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    selectedImageUri = uri.toString();
-                    ivPreview.setImageURI(uri);
-                    if (previewCard != null) previewCard.setVisibility(View.VISIBLE);
-                } catch (Exception e) {
-                    // Fallback: If persistable fails, we still use the URI for this session
-                    selectedImageUri = uri.toString();
-                    ivPreview.setImageURI(uri);
-                    Toast.makeText(this, "Note: Image link may not persist after reboot", Toast.LENGTH_SHORT).show();
+        if (resultCode == RESULT_OK && data != null) {
+            int count = 0;
+            Uri firstUri = null;
+
+            if (data.getClipData() != null) {
+                // User selected multiple images
+                count = data.getClipData().getItemCount();
+                firstUri = data.getClipData().getItemAt(0).getUri();
+            } else if (data.getData() != null) {
+                // User selected single image
+                count = 1;
+                firstUri = data.getData();
+            }
+
+            // Persist permission for the first image so we can show it in the list later
+            if (firstUri != null) {
+                final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
+                getContentResolver().takePersistableUriPermission(firstUri, takeFlags);
+
+                if (requestCode == ROOM_IMAGES) {
+                    mainImageUri = firstUri.toString();
                 }
             }
+
+            // Update the UI Counters
+            String countText = count + " images selected";
+            if (requestCode == ROOM_IMAGES) tvRoomCount.setText(countText);
+            else if (requestCode == FURNITURE_IMAGES) tvFurnitureCount.setText(countText);
+            else if (requestCode == FACILITY_IMAGES) tvFacilityCount.setText(countText);
         }
     }
 
@@ -87,57 +109,28 @@ public class OwnerDocumentSubmissionActivity extends AppCompatActivity {
         String address = etHostelAddress.getText().toString().trim();
         String facilities = etFacilities.getText().toString().trim();
 
-        if (name.isEmpty() || address.isEmpty()) {
-            Toast.makeText(this, "Hostel Name and Address are required!", Toast.LENGTH_SHORT).show();
+        if (name.isEmpty() || address.isEmpty() || mainImageUri.isEmpty()) {
+            Toast.makeText(this, "Please fill required fields and upload room images", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Updating Hostel Registry...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
-        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
-        btnSubmit.setEnabled(false);
-
-        Hostel newHostel = new Hostel(
-                name, "Price TBD", "5.0", "Private", address,
-                "WiFi", "CCTV", "Laundry", "Standard", "Available",
-                facilities, "Yes", "0", "0000000000", "owner@hostello.com",
-                selectedImageUri
-        );
-
-
-
         executor.execute(() -> {
-            try {
-                // If you are using auto-generate IDs, this creates a NEW entry.
-                // Consider using db.hostelDao().update(newHostel) if the hostel already exists.
-                db.hostelDao().insertAll(newHostel);
+            Hostel newHostel = new Hostel();
+            newHostel.name = name;
+            newHostel.location = address;
+            newHostel.facilities = facilities;
+            newHostel.imageResourceName = mainImageUri; // The persisted Gallery URI
+            newHostel.price = "Contact for Price"; // Default placeholder
+            newHostel.type = "Boys/Girls"; // Default placeholder
+            newHostel.rating = "5.0";
 
-                Thread.sleep(500); // Short buffer for stability
+            db.hostelDao().insertAll(newHostel);
 
-                runOnUiThread(() -> {
-                    if (!isFinishing()) {
-                        progressDialog.dismiss();
-                        Toast.makeText(this, "Hostel Registered Successfully!", Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(this, OwnerDashboardActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-            } catch (Exception e) {
-                runOnUiThread(() -> {
-                    if (!isFinishing()) {
-                        progressDialog.dismiss();
-                        btnSubmit.setEnabled(true);
-                        if (progressBar != null) progressBar.setVisibility(View.GONE);
-                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+            runOnUiThread(() -> {
+                Toast.makeText(this, "Submission Successful!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, OwnerDashboardActivity.class));
+                finish();
+            });
         });
     }
 }

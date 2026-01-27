@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
 
         // 🔹 Navigate to Owner Side (Registration/Intro)
         signup.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), OwnerActivity.class);
+            Intent intent = new Intent(getActivity(), buy_or_sell.class);
             startActivity(intent);
         });
 

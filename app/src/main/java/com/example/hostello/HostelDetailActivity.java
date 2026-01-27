@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.text.SimpleDateFormat;
@@ -61,7 +62,9 @@ public class HostelDetailActivity extends AppCompatActivity {
         String desc = getIntent().getStringExtra("desc");
         String mess = getIntent().getStringExtra("mess");
         phone = getIntent().getStringExtra("phone");
-        String imgName = getIntent().getStringExtra("image");
+
+        // Use a single key for the image to avoid confusion
+        String imgSource = getIntent().getStringExtra("image");
 
         // 3️⃣ Set basic data
         nameTv.setText(hostelName != null ? hostelName : "Hostel Details");
@@ -80,12 +83,25 @@ public class HostelDetailActivity extends AppCompatActivity {
             messPriceTv.setText("");
         }
 
-        if (imgName != null) {
-            int resId = getResources().getIdentifier(imgName, "drawable", getPackageName());
-            imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
+        // 4️⃣ FIXED IMAGE LOADING LOGIC
+        if (imgSource != null) {
+            if (imgSource.startsWith("content://") || imgSource.startsWith("file://") || imgSource.startsWith("/")) {
+                // It's a User Uploaded Image (URI or Path)
+                Glide.with(this)
+                        .load(imgSource)
+                        .placeholder(R.drawable.hostel54) // default placeholder
+                        .error(R.drawable.hostel54)       // fallback if load fails
+                        .into(imageView);
+            } else {
+                // It's a Drawable Name (e.g., "hostel1")
+                int resId = getResources().getIdentifier(imgSource, "drawable", getPackageName());
+                imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
+            }
+        } else {
+            imageView.setImageResource(R.drawable.hostel54);
         }
 
-        // 4️⃣ Call Button
+        // 5️⃣ Call Button
         callNowBtn.setOnClickListener(v -> {
             if (phone != null && !phone.isEmpty()) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -96,15 +112,14 @@ public class HostelDetailActivity extends AppCompatActivity {
             }
         });
 
-        // 5️⃣ Add Review Button
+        // 6️⃣ Add Review Button
         addReviewBtn.setOnClickListener(v -> showAddReviewDialog(hostelName));
 
-        // 6️⃣ Initialize Data
+        // 7️⃣ Initialize Data
         insertDummyReviews(hostelName);
         refreshReviews(hostelName);
 
-        // 7️⃣ FIXED: Load Average Rating using LiveData Observer
-        // Remove the executor for the rating observation
+        // 8️⃣ Load Average Rating using LiveData
         db.reviewDao().getAverageRating(hostelName).observe(this, avg -> {
             if (avg != null && avg > 0) {
                 avgRatingBar.setRating(avg);
@@ -148,7 +163,6 @@ public class HostelDetailActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         dialog.dismiss();
                         Toast.makeText(this, "Review submitted!", Toast.LENGTH_SHORT).show();
-                        // refreshReviews(hName); // Fragment handles itself if using LiveData
                     });
                 });
             } else {
@@ -159,9 +173,7 @@ public class HostelDetailActivity extends AppCompatActivity {
     }
 
     private void refreshReviews(String hName) {
-        // Ensure fragment transaction is safe
         if (isFinishing()) return;
-
         Bundle bundle = new Bundle();
         bundle.putString("hostelName", hName);
         ReviewFragment rf = new ReviewFragment();

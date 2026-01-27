@@ -52,8 +52,8 @@
             android:text="Sign Up"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:textColor="@color/white"
-            android:background="@drawable/social_media_bg"
+            android:textColor="@color/black"
+            android:background="@color/white"
             android:layout_marginBottom="12dp"
             android:elevation="2dp"/>
 
@@ -65,8 +65,8 @@
             android:text="Log In"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:textColor="@color/white"
-            android:background="@drawable/social_media_bg"
+            android:textColor="@color/black"
+            android:background="@color/white"
             android:elevation="2dp"
             android:layout_marginBottom="24dp"/>
 

@@ -10,4 +10,6 @@
     <color name="button_blue">#1565C0</color>
     <color name="blue_light">#90CAF9</color>
     <color name="light_blue_bg">#E3F2FD</color>
+    <color name="boys_blue">#1976D2</color>
+    <color name="girls_pink">#C2185B</color>
 </resources>
