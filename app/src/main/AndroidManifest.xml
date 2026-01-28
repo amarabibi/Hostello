@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hostello">
         <activity
+            android:name=".EditHostelActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Hostello" />
+        <activity
             android:name=".ManageBookingsActivity"
             android:exported="false"
             android:theme="@style/Theme.Hostello" />

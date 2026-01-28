@@ -30,7 +30,7 @@ public class ProfileFragment extends Fragment {
         View signup = view.findViewById(R.id.botn_buy_sell);
         LinearLayout googleLogin = view.findViewById(R.id.googleLogin);
         LinearLayout facebookLogin = view.findViewById(R.id.facebookLogin);
-        LinearLayout instaLogin = view.findViewById(R.id.insta);
+
         LinearLayout whatsappLogin = view.findViewById(R.id.whatsapp);
 
         // 🔹 Navigate to Owner Side (Registration/Intro)
@@ -45,8 +45,7 @@ public class ProfileFragment extends Fragment {
         // Open Facebook URL
         facebookLogin.setOnClickListener(v -> openUrl("https://www.facebook.com/login/"));
 
-        // Open Instagram URL
-        instaLogin.setOnClickListener(v -> openUrl("https://www.instagram.com/accounts/login/"));
+
 
         // Open WhatsApp Web
         whatsappLogin.setOnClickListener(v -> openUrl("https://web.whatsapp.com/"));

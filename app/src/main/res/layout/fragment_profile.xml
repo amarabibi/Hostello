@@ -1,215 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F5F9FC"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp">
+        android:orientation="vertical">
 
-        <!-- Profile Card -->
+        <!-- Enhanced Header Section -->
         <LinearLayout
-            android:id="@+id/profile_container"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#1565C0"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@android:drawable/ic_menu_gallery"
+                android:backgroundTint="#FFFFFF"
+                android:alpha="0.2"
+                android:layout_marginBottom="-60dp"/>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="👤"
+                android:textSize="56sp"
+                android:elevation="8dp"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome to Hostello"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.02" />
+            
+        </LinearLayout>
+
+        <!-- Main Content Area with Overlap -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-30dp"
+            android:background="@android:color/white"
+            android:elevation="12dp"
             android:orientation="vertical"
-            android:gravity="center"
-            android:background="#F5F9FF"
-            android:padding="20dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginBottom="24dp"
-            android:elevation="4dp">
+            android:padding="24dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="👤"
-                android:textColor="#1565C0"
-                android:textSize="48sp"
-                android:layout_marginBottom="12dp" />
+            <!-- Primary Action Buttons -->
+            <Button
+                android:id="@+id/botn_buy_sell"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#1565C0"
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profile"
-                android:textSize="26sp"
+            <Button
+                android:id="@+id/botn_buy_sell2"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Sign In to Your Account"
+                android:textAllCaps="false"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#1565C0"
-                android:letterSpacing="0.05" />
-        </LinearLayout>
+                android:layout_marginBottom="24dp"/>
 
-        <!-- Sign Up Button -->
-        <Button
-            android:id="@+id/botn_buy_sell"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Sign Up"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:layout_marginBottom="12dp"
-            android:elevation="2dp"/>
-
-        <!-- Login Button -->
-        <Button
-            android:id="@+id/botn_buy_sell2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Log In"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:elevation="2dp"
-            android:layout_marginBottom="24dp"/>
-
-        <!-- OR divider -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="16dp">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#B0BEC5" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Enhanced Divider -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="  OR  "
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#CFD8DC" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  OR CONNECT WITH  "
+                    android:textColor="#90A4AE"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#CFD8DC" />
+            </LinearLayout>
+
+            <!-- Social Logins as Grid/Styled Rows -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Google -->
+                <LinearLayout
+                    android:id="@+id/googleLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@android:color/white"
+                    android:elevation="1dp"
+                    android:padding="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_menu_search"
+                        android:contentDescription="Google" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Continue with Google"
+                        android:textColor="#455A64"
+                        android:textStyle="bold"
+                        android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+                <!-- Facebook -->
+                <LinearLayout
+                    android:id="@+id/facebookLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="#E7EAF3"
+                    android:padding="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:contentDescription="Facebook"
+                        app:tint="#1565C0"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Continue with Facebook"
+                        android:textColor="#1565C0"
+                        android:textStyle="bold"
+                        android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+                <!-- WhatsApp (Secondary Action) -->
+                <LinearLayout
+                    android:id="@+id/whatsapp"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="#F1F8E9"
+                    android:padding="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@android:drawable/ic_menu_send"
+                        android:contentDescription="WhatsApp"
+                        app:tint="#2E7D32"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Get Link via WhatsApp"
+                        android:textColor="#2E7D32"
+                        android:textStyle="bold"
+                        android:layout_marginStart="12dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Footer Note -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="By continuing, you agree to our Terms and Privacy Policy"
+                android:gravity="center"
+                android:textSize="11sp"
                 android:textColor="#B0BEC5"
-                android:textStyle="bold"/>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="#B0BEC5" />
-        </LinearLayout>
-
-        <!-- Social Media Login Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <!-- Google -->
-            <LinearLayout
-                android:id="@+id/googleLogin"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/social_media_bg"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/google"
-                    android:contentDescription="Google" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue with Google"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
-
-            <!-- Facebook -->
-            <LinearLayout
-                android:id="@+id/facebookLogin"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/social_media_bg"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/facebook"
-                    android:contentDescription="Facebook" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue with Facebook"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
-
-            <!-- Instagram -->
-            <LinearLayout
-                android:id="@+id/insta"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/social_media_bg"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/insta"
-                    android:contentDescription="Instagram" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue with Instagram"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
-
-            <!-- WhatsApp -->
-            <LinearLayout
-                android:id="@+id/whatsapp"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@drawable/social_media_bg"
-                android:padding="12dp"
-                android:layout_marginBottom="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/whatsapp"
-                    android:contentDescription="WhatsApp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue with WhatsApp"
-                    android:textColor="#000000"
-                    android:textStyle="bold"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
+                android:layout_marginTop="16dp"/>
 
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>

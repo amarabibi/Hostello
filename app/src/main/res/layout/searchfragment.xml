@@ -5,55 +5,89 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F5F9FC"
     tools:context=".SearchFragment">
 
-    <!-- Search icon centered initially -->
-    <ImageView
-        android:id="@+id/searchIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_search"
-        android:layout_gravity="center"
-        android:contentDescription="Search Icon"
-        app:tint="#1565C0" />
-
-    <!-- Optional label under icon -->
-    <TextView
-        android:id="@+id/searchLabel"
+    <!-- Landing State: Search icon centered initially -->
+    <LinearLayout
+        android:id="@+id/landingLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
-        android:textSize="36sp"
-        android:textColor="@color/dark_blue"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="100dp"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <!-- Hidden layout for search bar + hostel list -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:cardCornerRadius="60dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@android:drawable/ic_menu_search"
+                android:contentDescription="Search Icon"
+                app:tint="#1565C0" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/searchLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Find Your Hostel"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#1565C0"
+            android:letterSpacing="0.02" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap to start searching"
+            android:textColor="#90A4AE"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+    <!-- Active Search Layout: search bar + hostel list -->
     <LinearLayout
         android:id="@+id/searchLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:background="#F5F9FC">
 
-        <!-- Search bar -->
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <!-- Search bar container for elevation and padding -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Type hostel name..."
-            android:textColor="@color/black"
-            android:iconifiedByDefault="false"/>
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                app:queryHint="Type hostel name or location..."
+                app:iconifiedByDefault="false"
+                app:queryBackground="@android:color/transparent"
+                app:searchIcon="@android:drawable/ic_menu_search"/>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- RecyclerView for hostel list -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hostelRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"/>
+            android:layout_height="match_parent"
+            android:paddingHorizontal="12dp"
+            android:clipToPadding="false"/>
     </LinearLayout>
 
 </FrameLayout>

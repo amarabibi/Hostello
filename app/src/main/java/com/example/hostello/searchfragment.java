@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SearchFragment extends Fragment {
 
@@ -26,7 +28,8 @@ public class SearchFragment extends Fragment {
     private HostelAdapter adapter;
 
     private List<Hostel> hostelList = new ArrayList<>();
-    private List<Hostel> filteredList = new ArrayList<>();
+    private AppDatabase db;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Nullable
     @Override
@@ -34,6 +37,9 @@ public class SearchFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.searchfragment, container, false);
+
+        // Initialize Database
+        db = AppDatabase.getInstance(getContext());
 
         searchIcon = view.findViewById(R.id.searchIcon);
         searchLayout = view.findViewById(R.id.searchLayout);
@@ -46,28 +52,23 @@ public class SearchFragment extends Fragment {
 
         searchLayout.setVisibility(View.GONE);
 
-        // 1️⃣ Load predefined data (Clear first to prevent duplicates on fragment reload)
-        hostelList.clear();
-        hostelList.addAll(HostelDataGenerator.getPredefinedHostels());
-
-        filteredList.clear();
-        filteredList.addAll(hostelList);
-
-        // 2️⃣ FIXED CONSTRUCTOR: Matches (Context, List)
-        adapter = new HostelAdapter(getContext(), filteredList);
-
+        // Initialize Adapter with empty list initially
+        adapter = new HostelAdapter(getContext(), new ArrayList<>(hostelList));
         hostelRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         hostelRecyclerView.setAdapter(adapter);
 
-        // 3️⃣ Search bar toggle
+        // Load data from both Predefined source and Database
+        loadAllHostels();
+
+        // Search bar toggle
         searchIcon.setOnClickListener(v -> {
             searchIcon.setVisibility(View.GONE);
             searchLayout.setVisibility(View.VISIBLE);
-            searchView.setIconified(false); // Opens search bar immediately
+            searchView.setIconified(false);
             searchView.requestFocus();
         });
 
-        // 4️⃣ Search logic
+        // Search logic
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -85,6 +86,33 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
+    private void loadAllHostels() {
+        executor.execute(() -> {
+            List<Hostel> allHostels = new ArrayList<>();
+
+            // 1. Get Predefined Data
+            allHostels.addAll(HostelDataGenerator.getPredefinedHostels());
+
+            // 2. Fetch New Hostels from Database
+            if (db != null && db.hostelDao() != null) {
+                List<Hostel> dbHostels = db.hostelDao().getAllHostels();
+                if (dbHostels != null) {
+                    allHostels.addAll(dbHostels);
+                }
+            }
+
+            // Update UI
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    hostelList.clear();
+                    hostelList.addAll(allHostels);
+                    adapter.setHostels(new ArrayList<>(hostelList));
+                    adapter.notifyDataSetChanged();
+                });
+            }
+        });
+    }
+
     private void filterHostels(String query) {
         List<Hostel> tempResultList = new ArrayList<>();
 
@@ -93,17 +121,27 @@ public class SearchFragment extends Fragment {
         } else {
             String lowerCaseQuery = query.toLowerCase().trim();
             for (Hostel hostel : hostelList) {
-                if (hostel.name.toLowerCase().contains(lowerCaseQuery)
-                        || hostel.location.toLowerCase().contains(lowerCaseQuery)) {
+                // Check name or location
+                boolean matchesName = hostel.name != null && hostel.name.toLowerCase().contains(lowerCaseQuery);
+                boolean matchesLocation = hostel.location != null && hostel.location.toLowerCase().contains(lowerCaseQuery);
+
+                if (matchesName || matchesLocation) {
                     tempResultList.add(hostel);
                 }
             }
         }
 
-        // Update the adapter using the method we added earlier
         if (adapter != null) {
             adapter.setHostels(tempResultList);
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (executor != null) {
+            executor.shutdown();
         }
     }
 }

@@ -43,22 +43,8 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
         TextInputEditText etEmail = findViewById(R.id.etEmail);
         MaterialButton btnSave = findViewById(R.id.btnSaveHostel);
 
-        // Debug: Check if any views are null
-        if (etName == null) Log.e("HOSTELLO", "etName is NULL!");
-        if (etPrice == null) Log.e("HOSTELLO", "etPrice is NULL!");
-        if (etLocation == null) Log.e("HOSTELLO", "etLocation is NULL!");
-        if (etType == null) Log.e("HOSTELLO", "etType is NULL!");
-        if (etRoomType == null) Log.e("HOSTELLO", "etRoomType is NULL!");
-        if (etAmenity1 == null) Log.e("HOSTELLO", "etAmenity1 is NULL!");
-        if (etAmenity2 == null) Log.e("HOSTELLO", "etAmenity2 is NULL!");
-        if (etFacilities == null) Log.e("HOSTELLO", "etFacilities is NULL!");
-        if (etPhone == null) Log.e("HOSTELLO", "etPhone is NULL!");
-        if (etEmail == null) Log.e("HOSTELLO", "etEmail is NULL!");
-        if (btnSave == null) Log.e("HOSTELLO", "btnSave is NULL!");
-
-        // Check if button was found
         if (btnSave == null) {
-            Toast.makeText(this, "UI Error: Button not found", Toast.LENGTH_LONG).show();
+            Log.e("HOSTELLO", "btnSave is NULL!");
             return;
         }
 
@@ -79,13 +65,11 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
 
             // Validation
             if (name.isEmpty() || price.isEmpty() || location.isEmpty() || phone.isEmpty()) {
-                Toast.makeText(OwnerRegistrationActivity.this, "Please fill all required fields (Name, Price, Location, Phone)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OwnerRegistrationActivity.this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Log.d("HOSTELLO", "Creating hostel object with name: " + name);
-
-            // Create hostel object
+            // Create hostel object - explicit mapping ensures phone is passed correctly
             Hostel newHostel = new Hostel(
                     name, price, "5.0", type, location,
                     a1, a2, "Laundry", roomType, "Available",
@@ -95,51 +79,28 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
             // Execute database insert in background
             executor.execute(() -> {
                 try {
-                    Log.d("HOSTELLO", "Starting database insert...");
-
-                    // Verify DAO is not null
-                    if (db == null) {
-                        throw new Exception("Database instance is null");
-                    }
-                    if (db.hostelDao() == null) {
-                        throw new Exception("DAO is null. Check Database configuration.");
+                    if (db == null || db.hostelDao() == null) {
+                        throw new Exception("Database or DAO is null");
                     }
 
-                    // Insert into database - use the correct method name from your DAO
-                    // Try both possible method names
-                    try {
-                        db.hostelDao().insertAll(newHostel);
-                        Log.d("HOSTELLO", "Insert successful using insertAll()");
-                    } catch (NoSuchMethodError e1) {
-
-                    }
+                    // Use the dedicated single insert method from your DAO
+                    long id = db.hostelDao().insertHostel(newHostel);
+                    Log.d("HOSTELLO", "Insert successful. New Hostel ID: " + id + " with Phone: " + phone);
 
                     // Navigate to next screen on success
                     runOnUiThread(() -> {
                         Toast.makeText(OwnerRegistrationActivity.this, "Hostel Listed Successfully!", Toast.LENGTH_LONG).show();
 
-                        try {
-                            // Navigate to Document Submission Activity
-                            Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDocumentSubmissionActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        } catch (Exception navError) {
-                            Log.e("HOSTELLO", "Navigation Error: " + navError.getMessage());
-                            Toast.makeText(OwnerRegistrationActivity.this,
-                                    "Saved successfully, but navigation failed. Please check if OwnerDocumentSubmissionActivity exists.",
-                                    Toast.LENGTH_LONG).show();
-                        }
+                        Intent intent = new Intent(OwnerRegistrationActivity.this, OwnerDocumentSubmissionActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
                     });
 
                 } catch (Exception e) {
-                    Log.e("HOSTELLO", "Database Insert Failed: " + e.getMessage(), e);
-                    e.printStackTrace();
-
+                    Log.e("HOSTELLO", "Database Insert Failed: " + e.getMessage());
                     runOnUiThread(() -> {
-                        Toast.makeText(OwnerRegistrationActivity.this,
-                                "Save Failed: " + e.getMessage(),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(OwnerRegistrationActivity.this, "Save Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
                 }
             });
@@ -151,7 +112,6 @@ public class OwnerRegistrationActivity extends AppCompatActivity {
         super.onDestroy();
         if (executor != null && !executor.isShutdown()) {
             executor.shutdown();
-            Log.d("HOSTELLO", "Executor service shutdown");
         }
     }
 }
