@@ -26,8 +26,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/hostel54"
+                android:src="@android:drawable/ic_menu_gallery"
                 android:contentDescription="Hostel Image"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#33000000"/>
 
             <TextView
                 android:id="@+id/tvRating"
@@ -37,25 +42,38 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="13sp"
-                android:background="@color/dark_blue"
-                android:padding="8dp"
+                android:background="#0D47A1"
+                android:paddingStart="8dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_gravity="top|end"
                 android:layout_margin="12dp"
-                app:drawableTint="@android:color/white" />
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/baseline_star_24"
+                app:drawableTint="#FFC107"
+                android:drawablePadding="4dp" />
 
-            <TextView
-                android:id="@+id/typeBadge"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Boys"
-                android:textColor="@android:color/white"
-                android:background="@drawable/badge_background"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
                 android:layout_gravity="top|start"
                 android:layout_margin="12dp"
-                android:textSize="11sp"
-                android:textStyle="bold"/>
+                app:cardCornerRadius="4dp"
+                app:cardBackgroundColor="#1976D2"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/typeBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Boys"
+                    android:textColor="@android:color/white"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:textSize="11sp"
+                    android:textStyle="bold"/>
+            </androidx.cardview.widget.CardView>
         </FrameLayout>
 
         <LinearLayout
@@ -78,7 +96,7 @@
                     android:text="Elite Boys Hostel"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
+                    android:textColor="#0D47A1"/>
 
                 <TextView
                     android:id="@+id/tvPrice"
@@ -87,7 +105,7 @@
                     android:text="PKR 12,000"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
+                    android:textColor="#0D47A1"/>
             </LinearLayout>
 
             <TextView
@@ -108,7 +126,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📍"
+                    app:drawableStartCompat="@drawable/baseline_add_location_24"
                     android:textSize="14sp"/>
 
                 <TextView
@@ -131,7 +149,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="🛏️ 2-3 Seater"
+                    android:text=" 2-3 Seater"
+                    app:drawableStartCompat="@drawable/baseline_single_bed_24"
                     android:textSize="12sp"
                     android:textColor="#424242"/>
 
@@ -139,7 +158,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="📶 Free WiFi"
+                    android:text=" Free WiFi"
+                    app:drawableStartCompat="@drawable/baseline_wifi_password_24"
                     android:textSize="12sp"
                     android:textColor="#424242"/>
 
@@ -147,7 +167,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="❄️ AC Rooms"
+                    android:text=" AC Rooms"
+                    app:drawableStartCompat="@drawable/baseline_ac_unit_24"
                     android:textSize="12sp"
                     android:textColor="#424242"/>
             </LinearLayout>
@@ -157,13 +178,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="View Full Details"
-                android:textColor="@color/dark_blue"
+                android:textColor="#0D47A1"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:clickable="false"
                 android:focusable="false"
                 app:cornerRadius="8dp"
-                app:strokeColor="@color/dark_blue"
+                app:strokeColor="#0D47A1"
                 app:strokeWidth="2dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_marginTop="12dp"/>
