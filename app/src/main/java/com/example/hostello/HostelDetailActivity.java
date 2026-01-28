@@ -36,7 +36,7 @@ public class HostelDetailActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        // 1️⃣ Initialize Views
+        // Initialize Views
         ImageView imageView = findViewById(R.id.detailHostelImage);
         TextView nameTv = findViewById(R.id.detailHostelName);
         TextView priceTv = findViewById(R.id.detailHostelPrice);
@@ -53,47 +53,47 @@ public class HostelDetailActivity extends AppCompatActivity {
         Button callNowBtn = findViewById(R.id.btnCallNow);
         Button addReviewBtn = findViewById(R.id.btnAddReview);
 
-        // 2️⃣ Get data from Intent
+        // Get data from Intent - Ensure these match the keys in your Adapter
         hostelName = getIntent().getStringExtra("name");
         String price = getIntent().getStringExtra("price");
         String location = getIntent().getStringExtra("location");
         String type = getIntent().getStringExtra("type");
-        String room = getIntent().getStringExtra("roomType");
-        String desc = getIntent().getStringExtra("desc");
-        String mess = getIntent().getStringExtra("mess");
+        String roomType = getIntent().getStringExtra("roomType");
+        String facilities = getIntent().getStringExtra("desc");
+        String messAvailability = getIntent().getStringExtra("mess");
+        String messCharges = getIntent().getStringExtra("messPrice");
         phone = getIntent().getStringExtra("phone");
-
-        // Use a single key for the image to avoid confusion
         String imgSource = getIntent().getStringExtra("image");
 
-        // 3️⃣ Set basic data
+        // Set basic data to UI
         nameTv.setText(hostelName != null ? hostelName : "Hostel Details");
-        priceTv.setText(price != null ? price : "");
+        priceTv.setText(price != null ? price : "N/A");
         locationTv.setText(location != null ? "📍 " + location : "");
-        typeTv.setText(type != null ? type : "");
-        roomTv.setText(room != null ? "Room: " + room : "");
-        descTv.setText(desc != null ? desc : "");
+        typeTv.setText(type != null ? "Category: " + type : "");
+        roomTv.setText(roomType != null ? "Room Type: " + roomType : "");
+        descTv.setText(facilities != null ? facilities : "No additional description provided.");
 
-        if (mess != null && mess.contains("(")) {
-            int index = mess.lastIndexOf("(");
-            messTv.setText("Availability: " + mess.substring(0, index).trim());
-            messPriceTv.setText("Charges: " + mess.substring(index).trim());
+        // Handle Mess/Food Data logic
+        if (messAvailability != null && !messAvailability.isEmpty()) {
+            messTv.setText("Mess: " + messAvailability);
+
+            if (messCharges != null && !messCharges.isEmpty() && !messCharges.equals("PKR 0")) {
+                messPriceTv.setText("Mess Charges: " + messCharges);
+            } else if ("Included".equalsIgnoreCase(messAvailability.trim())) {
+                messPriceTv.setText("Mess Charges: Included in Rent");
+            } else {
+                messPriceTv.setText("Mess Charges: N/A");
+            }
         } else {
-            messTv.setText(mess != null ? mess : "N/A");
+            messTv.setText("Mess: Not Specified");
             messPriceTv.setText("");
         }
 
-        // 4️⃣ FIXED IMAGE LOADING LOGIC
+        // Image Loading Logic
         if (imgSource != null) {
             if (imgSource.startsWith("content://") || imgSource.startsWith("file://") || imgSource.startsWith("/")) {
-                // It's a User Uploaded Image (URI or Path)
-                Glide.with(this)
-                        .load(imgSource)
-                        .placeholder(R.drawable.hostel54) // default placeholder
-                        .error(R.drawable.hostel54)       // fallback if load fails
-                        .into(imageView);
+                Glide.with(this).load(imgSource).placeholder(R.drawable.hostel54).error(R.drawable.hostel54).into(imageView);
             } else {
-                // It's a Drawable Name (e.g., "hostel1")
                 int resId = getResources().getIdentifier(imgSource, "drawable", getPackageName());
                 imageView.setImageResource(resId != 0 ? resId : R.drawable.hostel54);
             }
@@ -101,7 +101,7 @@ public class HostelDetailActivity extends AppCompatActivity {
             imageView.setImageResource(R.drawable.hostel54);
         }
 
-        // 5️⃣ Call Button
+        // Call Button Action
         callNowBtn.setOnClickListener(v -> {
             if (phone != null && !phone.isEmpty()) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -112,14 +112,11 @@ public class HostelDetailActivity extends AppCompatActivity {
             }
         });
 
-        // 6️⃣ Add Review Button
+        // Review Logic
         addReviewBtn.setOnClickListener(v -> showAddReviewDialog(hostelName));
-
-        // 7️⃣ Initialize Data
-        insertDummyReviews(hostelName);
         refreshReviews(hostelName);
 
-        // 8️⃣ Load Average Rating using LiveData
+        // Load Average Rating from DB using LiveData
         db.reviewDao().getAverageRating(hostelName).observe(this, avg -> {
             if (avg != null && avg > 0) {
                 avgRatingBar.setRating(avg);
@@ -127,16 +124,6 @@ public class HostelDetailActivity extends AppCompatActivity {
             } else {
                 avgRatingBar.setRating(0f);
                 avgRatingTv.setText("(No reviews)");
-            }
-        });
-    }
-
-    private void insertDummyReviews(String hName) {
-        executor.execute(() -> {
-            int count = db.reviewDao().getReviewCount(hName);
-            if (count == 0) {
-                db.reviewDao().insertReview(new ReviewModel("Ali Khan", "24 Jan 2026", 5.0f, "Best hostel in the area!", hName));
-                db.reviewDao().insertReview(new ReviewModel("Zainab Bibi", "20 Jan 2026", 4.0f, "Great food and secure.", hName));
             }
         });
     }
@@ -173,12 +160,10 @@ public class HostelDetailActivity extends AppCompatActivity {
     }
 
     private void refreshReviews(String hName) {
-        if (isFinishing()) return;
         Bundle bundle = new Bundle();
         bundle.putString("hostelName", hName);
         ReviewFragment rf = new ReviewFragment();
         rf.setArguments(bundle);
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.reviewFragmentContainer, rf)
                 .commit();

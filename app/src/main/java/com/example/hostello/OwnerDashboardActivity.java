@@ -46,7 +46,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
 
         // 1. Navigation to Home Fragment (MainActivity / MainHomeActivity)
         btnViewHome.setOnClickListener(v -> {
-            Intent intent = new Intent(OwnerDashboardActivity.this, MainHomeActivity.class);
+            Intent intent = new Intent(OwnerDashboardActivity.this, HomeFragment.class);
             // Brings existing home activity to front rather than recreating it
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
